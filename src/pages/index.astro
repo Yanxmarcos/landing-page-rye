@@ -1,5 +1,6 @@
 ---
-
+import "../styles/global.css";
+import Boton from "../components/Boton.jsx";
 ---
 
 <html lang="en">
@@ -12,6 +13,9 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<h1 class="text-9xl font-bold text-blue-700 underline text-center">
+			RYE WEB
+		</h1>
+		<Boton client:load />
 	</body>
 </html>
