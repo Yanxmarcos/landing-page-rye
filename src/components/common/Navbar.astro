@@ -1,0 +1,307 @@
+---
+const navLinks = [
+  { label: 'Servicios',  href: '#servicios'  },
+  { label: 'Proceso',    href: '#proceso'    },
+  { label: 'Portafolio', href: '#portafolio' },
+  { label: 'Nosotros',   href: '#nosotros'   },
+  { label: 'Contacto',   href: '#contacto'   },
+];
+---
+
+<header class="navbar" id="navbar">
+  <nav class="navbar__inner container">
+
+    <!-- Logo: imagen desde public/logo-ryeweb.png -->
+    <a href="/" class="navbar__logo" aria-label="RYE WEB — inicio">
+      <img
+        src="/logo-ryeweb.PNG"
+        alt="RYE WEB"
+        class="navbar__logo-img"
+        width="140"
+        height="48"
+      />
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="navbar__links" id="nav-menu" role="list">
+      {navLinks.map(link => (
+        <li>
+          <a href={link.href} class="navbar__link">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA desktop -->
+    <a href="#contacto" class="navbar__cta">
+      Cotizar gratis
+    </a>
+
+    <!-- Hamburger móvil -->
+    <button
+      class="navbar__hamburger"
+      id="hamburger"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </nav>
+
+  <!-- Menú móvil -->
+  <div class="navbar__mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="navbar__mobile-inner">
+      {navLinks.map(link => (
+        <a href={link.href} class="navbar__mobile-link">
+          {link.label}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 8h8M9 5l3 3-3 3"
+                  stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      ))}
+      <a href="#contacto" class="navbar__mobile-cta">Cotizar gratis</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const navbar     = document.getElementById('navbar')!;
+  const hamburger  = document.getElementById('hamburger')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+
+  // Scroll effect
+  const onScroll = () => {
+    navbar.classList.toggle('navbar--scrolled', window.scrollY > 40);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Toggle menú móvil
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+    hamburger.classList.toggle('navbar__hamburger--open', !isOpen);
+    mobileMenu.classList.toggle('navbar__mobile-menu--open', !isOpen);
+    mobileMenu.setAttribute('aria-hidden', String(isOpen));
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+
+  // Cerrar al hacer click en link móvil
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.classList.remove('navbar__hamburger--open');
+      mobileMenu.classList.remove('navbar__mobile-menu--open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Active link por sección visible
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('.navbar__link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(link => {
+          link.classList.toggle(
+            'navbar__link--active',
+            link.getAttribute('href') === `#${entry.target.id}`
+          );
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .navbar--scrolled {
+    background: rgba(5, 10, 15, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.625rem 0;
+    border-color: rgba(30, 159, 232, 0.14);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* --- Logo imagen --------------------------------------- */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .navbar__logo-img {
+    /* Ajusta height según cómo se vea tu logo real */
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    /* Filtro para que el logo se vea bien sobre fondo transparente
+       Si tu PNG ya tiene fondo transparente, quita estas dos líneas */
+    filter: brightness(1);
+    transition: opacity 0.2s;
+  }
+
+  .navbar__logo:hover .navbar__logo-img { opacity: 0.88; }
+
+  /* --- Links desktop ------------------------------------- */
+  .navbar__links {
+    display: flex;
+    list-style: none;
+    gap: 1.75rem;
+    margin-left: auto;
+  }
+
+  .navbar__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.22s;
+  }
+
+  .navbar__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--color-blue);
+    border-radius: 2px;
+    transition: width 0.25s ease;
+  }
+
+  .navbar__link:hover,
+  .navbar__link--active { color: var(--color-text); }
+
+  .navbar__link:hover::after,
+  .navbar__link--active::after { width: 100%; }
+
+  /* --- CTA ----------------------------------------------- */
+  .navbar__cta {
+    background: var(--color-blue);
+    color: #fff;
+    border-radius: var(--radius-full);
+    padding: 0.5rem 1.25rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .navbar__cta:hover { opacity: 0.86; transform: translateY(-1px); }
+
+  /* --- Hamburger ----------------------------------------- */
+  .navbar__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: auto;
+  }
+
+  .navbar__hamburger span {
+    display: block;
+    width: 22px; height: 1.5px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .navbar__hamburger--open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+  .navbar__hamburger--open span:nth-child(2) { opacity: 0; transform: translateX(-8px); }
+  .navbar__hamburger--open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+  /* --- Menú móvil ---------------------------------------- */
+  .navbar__mobile-menu {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    background: rgba(5, 10, 15, 0.98);
+    border-top: 1px solid rgba(30, 159, 232, 0.1);
+    transition: max-height 0.35s ease;
+  }
+
+  .navbar__mobile-menu--open { max-height: 360px; }
+
+  .navbar__mobile-inner {
+    padding: 1.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .navbar__mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .navbar__mobile-link svg { opacity: 0.3; transition: opacity 0.2s, transform 0.2s; }
+
+  .navbar__mobile-link:hover { color: var(--color-text); }
+  .navbar__mobile-link:hover svg { opacity: 0.7; transform: translateX(3px); }
+
+  .navbar__mobile-cta {
+    display: block;
+    background: var(--color-blue);
+    color: #fff;
+    text-align: center;
+    border-radius: var(--radius-full);
+    padding: 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .navbar__mobile-cta:hover { opacity: 0.88; }
+
+  /* --- Responsive ---------------------------------------- */
+  @media (max-width: 860px) {
+    .navbar__links,
+    .navbar__cta { display: none; }
+
+    .navbar__hamburger { display: flex; }
+    .navbar__mobile-menu { display: block; }
+  }
+</style>

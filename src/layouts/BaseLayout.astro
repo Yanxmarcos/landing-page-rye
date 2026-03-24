@@ -1,0 +1,45 @@
+---
+import SEO from '../components/seo/SEO.astro';
+import Navbar from '../components/common/Navbar.astro';
+import Footer from '../components/common/Footer.astro';
+import WhatsappFloat from '../components/common/WhatsappFloat.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <SEO {title} {description} {image} />
+
+    <!-- Schema.org JSON-LD (Local Business) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "RYE WEB",
+      "description": "Agencia de desarrollo web especializada en landing pages, tiendas virtuales y sistemas web a medida.",
+      "url": "https://ryeweb.com",
+      "sameAs": []
+    }
+    </script>
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsappFloat />
+  </body>
+</html>

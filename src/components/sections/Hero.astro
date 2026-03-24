@@ -1,0 +1,658 @@
+---
+import Button from '../ui/Button.astro';
+---
+
+<section class="hero" id="inicio">
+  <div class="hero__inner container">
+
+    <!-- Columna izquierda -->
+    <div class="hero__content">
+
+      <span class="hero__eyebrow">
+        <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+        Agencia de desarrollo web · Lima, Perú
+      </span>
+
+      <h1 class="hero__title">
+        Tu negocio merece<br />
+        una web que <em>conquista</em>
+      </h1>
+
+      <p class="hero__description">
+        Construimos sitios que convierten visitantes en clientes reales.
+        Landing pages, tiendas virtuales y sistemas web  con estrategia,
+        diseño limpio y código que escala.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#contacto" class="hero__btn hero__btn--primary">
+          Cotizar mi proyecto
+        </a>
+        <a href="#portafolio" class="hero__btn hero__btn--ghost">
+          Ver portafolio
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4"
+                  stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-number">30<em>+</em></span>
+          <span class="hero__stat-label">Proyectos<br />entregados</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-number">100<em>%</em></span>
+          <span class="hero__stat-label">Clientes<br />satisfechos</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-number">3<em>x</em></span>
+          <span class="hero__stat-label">Más conversiones<br />promedio</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Columna derecha: browser mockup -->
+    <div class="hero__visual" aria-hidden="true">
+
+      <!-- Badge superior -->
+      <div class="hero__badge hero__badge--top">
+        <span class="hero__badge-icon hero__badge-icon--green">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M1.5 7l3.5 3.5 6.5-6.5"
+                  stroke="#1D9E75" stroke-width="1.6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="hero__badge-text">
+          Conversiones +180%
+          <small>Último proyecto</small>
+        </span>
+      </div>
+
+      <!-- Browser -->
+      <div class="browser">
+        <div class="browser__bar">
+          <span class="browser__dots">
+            <span class="browser__dot browser__dot--red"></span>
+            <span class="browser__dot browser__dot--yellow"></span>
+            <span class="browser__dot browser__dot--green"></span>
+          </span>
+          <span class="browser__url">
+            <span class="browser__url-dot"></span>
+            ryeweb.com
+          </span>
+        </div>
+
+        <div class="browser__content">
+          <span class="browser__scan" aria-hidden="true"></span>
+
+          <!-- Mini navbar -->
+          <div class="mock-nav">
+            <span class="mock-nav__logo">RYE <em>WEB</em></span>
+            <div class="mock-nav__links">
+              <span></span><span></span>
+              <span class="mock-nav__cta"></span>
+            </div>
+          </div>
+
+          <!-- Mini hero -->
+          <span class="mock-tag">Desarrollo Web</span>
+          <p class="mock-title">
+            Conecta. Crea.<br /><em>Acelera.<span class="mock-cursor"></span></em>
+          </p>
+
+          <div class="mock-lines">
+            <span></span><span></span>
+            <span class="mock-lines__short"></span>
+          </div>
+
+          <div class="mock-btns">
+            <span class="mock-btn mock-btn--primary">Cotizar</span>
+            <span class="mock-btn mock-btn--ghost">Portafolio</span>
+          </div>
+
+          <div class="mock-stats">
+            <div class="mock-stat">
+              <span class="mock-stat__num">30<em>+</em></span>
+              <span class="mock-stat__lbl">Proyectos</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat__num">100<em>%</em></span>
+              <span class="mock-stat__lbl">Satisfechos</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat__num">3<em>x</em></span>
+              <span class="mock-stat__lbl">Conversiones</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badge inferior -->
+      <div class="hero__badge hero__badge--bottom">
+        <span class="hero__badge-icon hero__badge-icon--blue">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <rect x="1.5" y="4.5" width="10" height="7.5" rx="2"
+                  stroke="#1E9FE8" stroke-width="1.2"/>
+            <path d="M4.5 4.5V3.5a2.5 2.5 0 015 0v1"
+                  stroke="#1E9FE8" stroke-width="1.2"/>
+          </svg>
+        </span>
+        <span class="hero__badge-text">
+          SSL + Seguridad
+          <small>Incluido siempre</small>
+        </span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =====================================================
+     HERO — estilos encapsulados en este componente
+  ===================================================== */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+    background:
+      radial-gradient(ellipse 55% 60% at 72% 30%, rgba(30,159,232,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 15% 78%, rgba(91,79,212,0.06) 0%, transparent 60%),
+      var(--color-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid de puntos sutil */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(30,159,232,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,159,232,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* --- Eyebrow pill ------------------------------------ */
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-blue);
+    border: 1px solid rgba(30,159,232,0.28);
+    border-radius: var(--radius-full);
+    padding: 5px 14px;
+    margin-bottom: 1.5rem;
+    animation: hero-fade-up 0.6s var(--ease-out) both;
+  }
+
+  .hero__eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-blue);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.35; transform: scale(0.6); }
+  }
+
+  /* --- Título ------------------------------------------ */
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 4.75rem);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    margin-bottom: 1.375rem;
+    animation: hero-fade-up 0.65s 0.08s var(--ease-out) both;
+  }
+
+  .hero__title em {
+    font-style: normal;
+    color: var(--color-blue);
+  }
+
+  /* --- Descripción ------------------------------------- */
+  .hero__description {
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    max-width: 46ch;
+    line-height: 1.78;
+    margin-bottom: 2.5rem;
+    animation: hero-fade-up 0.65s 0.16s var(--ease-out) both;
+  }
+
+  /* --- Botones ----------------------------------------- */
+  .hero__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    animation: hero-fade-up 0.65s 0.24s var(--ease-out) both;
+  }
+
+  .hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    padding: 0.875rem 2rem;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .hero__btn--primary {
+    background: var(--color-blue);
+    color: #fff;
+  }
+
+  .hero__btn--primary:hover {
+    opacity: 0.88;
+    transform: translateY(-2px);
+  }
+
+  .hero__btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid rgba(240,240,240,0.12);
+  }
+
+  .hero__btn--ghost:hover {
+    background: rgba(30,159,232,0.06);
+    border-color: rgba(30,159,232,0.35);
+  }
+
+  /* --- Stats ------------------------------------------- */
+  .hero__stats {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    animation: hero-fade-up 0.65s 0.32s var(--ease-out) both;
+    flex-wrap: wrap;
+  }
+
+  .hero__stat-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .hero__stat-number em {
+    font-style: normal;
+    color: var(--color-blue);
+  }
+
+  .hero__stat-label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-top: 5px;
+    line-height: 1.45;
+  }
+
+  /* --- Visual: browser mockup -------------------------- */
+  .hero__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: hero-fade-up 0.8s 0.2s var(--ease-out) both;
+  }
+
+  /* --- Badges flotantes -------------------------------- */
+  .hero__badge {
+    position: absolute;
+    background: var(--color-surface-2);
+    border: 1px solid rgba(30,159,232,0.22);
+    border-radius: 12px;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .hero__badge small {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-top: 1px;
+  }
+
+  .hero__badge-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__badge--top {
+    top: -14px;
+    right: -16px;
+    animation: badge-float 4.5s 1s ease-in-out infinite;
+  }
+
+  .hero__badge--bottom {
+    bottom: 10px;
+    left: -20px;
+    animation: badge-float 4s 0.5s ease-in-out infinite;
+  }
+
+  .hero__badge-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hero__badge-icon--green { background: rgba(29,158,117,0.14); }
+  .hero__badge-icon--blue  { background: rgba(30,159,232,0.14); }
+
+  /* --- Browser ----------------------------------------- */
+  .browser {
+    width: 100%;
+    max-width: 380px;
+    background: #0D1B2A;
+    border: 1px solid rgba(30,159,232,0.18);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(30,159,232,0.06);
+    animation: browser-float 5s ease-in-out infinite;
+  }
+
+  .browser__bar {
+    background: #0A1520;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(30,159,232,0.1);
+  }
+
+  .browser__dots { display: flex; gap: 5px; }
+
+  .browser__dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .browser__dot--red    { background: #E24B4A; }
+  .browser__dot--yellow { background: #EF9F27; }
+  .browser__dot--green  { background: #1D9E75; }
+
+  .browser__url {
+    flex: 1;
+    background: rgba(30,159,232,0.06);
+    border: 1px solid rgba(30,159,232,0.1);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 10px;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .browser__url-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #1D9E75;
+    flex-shrink: 0;
+  }
+
+  .browser__content {
+    padding: 18px 18px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Scan line */
+  .browser__scan {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(30,159,232,0.28), transparent);
+    animation: scan-line 3.5s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes scan-line {
+    0%   { top: 0; }
+    100% { top: 100%; }
+  }
+
+  /* Mini navbar */
+  .mock-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .mock-nav__logo {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  .mock-nav__logo em {
+    font-style: normal;
+    color: var(--color-blue);
+  }
+
+  .mock-nav__links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .mock-nav__links span {
+    display: block;
+    width: 20px; height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+  }
+
+  .mock-nav__cta {
+    background: var(--color-blue) !important;
+    width: 28px !important;
+    height: 14px !important;
+    border-radius: 20px !important;
+    opacity: 0.85;
+  }
+
+  /* Mini hero content */
+  .mock-tag {
+    display: inline-block;
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-blue);
+    border: 1px solid rgba(30,159,232,0.28);
+    border-radius: 100px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
+
+  .mock-title {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .mock-title em {
+    font-style: normal;
+    color: var(--color-blue);
+  }
+
+  .mock-cursor {
+    display: inline-block;
+    width: 2px; height: 13px;
+    background: var(--color-blue);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  .mock-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .mock-lines span {
+    display: block;
+    height: 4px;
+    background: rgba(122,143,166,0.18);
+    border-radius: 3px;
+  }
+
+  .mock-lines__short { width: 68% !important; }
+
+  .mock-btns {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  .mock-btn {
+    font-size: 8px;
+    font-weight: 700;
+    padding: 5px 13px;
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  .mock-btn--primary {
+    background: var(--color-blue);
+    color: #fff;
+  }
+
+  .mock-btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .mock-stats {
+    display: flex;
+    gap: 14px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(30,159,232,0.1);
+  }
+
+  .mock-stat__num {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .mock-stat__num em {
+    font-style: normal;
+    color: var(--color-blue);
+  }
+
+  .mock-stat__lbl {
+    display: block;
+    font-size: 8px;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+
+  /* --- Keyframes --------------------------------------- */
+  @keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes browser-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+  }
+
+  @keyframes badge-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+
+  /* --- Responsive -------------------------------------- */
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero__visual { display: none; }
+
+    .hero__title { font-size: clamp(2.2rem, 7vw, 3.5rem); }
+  }
+
+  @media (max-width: 500px) {
+    .hero__stats { gap: 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__eyebrow-dot,
+    .browser__scan,
+    .mock-cursor,
+    .browser,
+    .hero__badge--top,
+    .hero__badge--bottom {
+      animation: none;
+    }
+  }
+</style>
