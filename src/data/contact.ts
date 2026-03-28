@@ -5,9 +5,9 @@
 export const contactConfig = {
   // WhatsApp
   whatsapp: {
-    number:  '+51999999999',          // ← cambia por tu número real (con código de país)
-    display: '+51 999 999 999',       // ← formato visual
-    message: 'Hola, me interesa cotizar un proyecto web con RYE WEB.',
+    number:  '+51920574439',          // ← cambia por tu número real (con código de país)
+    display: '+51 920 574 439',       // ← formato visual
+    message: 'Hola, me interesa cotizar un proyecto web con RYE.',
     get url() {
       return `https://wa.me/${this.number.replace(/\D/g,'')}?text=${encodeURIComponent(this.message)}`;
     },

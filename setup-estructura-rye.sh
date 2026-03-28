@@ -158,7 +158,7 @@ EOF
 
 cat > src/components/common/WhatsappFloat.astro << 'EOF'
 ---
-const WHATSAPP_NUMBER = '+51999999999'; // Cambia por tu número real
+const WHATSAPP_NUMBER = '+51920574439'; // Cambia por tu número real
 const WHATSAPP_MSG = encodeURIComponent('Hola, me interesa cotizar un proyecto web.');
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 ---
@@ -422,7 +422,7 @@ EOF
 
 cat > src/components/sections/Contact.astro << 'EOF'
 ---
-const WHATSAPP = '+51999999999';
+const WHATSAPP = '+51920574439;
 const EMAIL = 'hola@ryeweb.com';
 ---
 <section class="contact section" id="contacto">
