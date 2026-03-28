@@ -18,7 +18,7 @@ export const services: Service[] = [
       'SEO técnico y velocidad 90+ en Lighthouse',
       'Integración con WhatsApp y formularios',
     ],
-    priceFrom: 'S/ 800',
+    priceFrom: 'S/ 150',
     delivery:  'Entrega en 7–10 días',
   },
   {
@@ -31,7 +31,7 @@ export const services: Service[] = [
       'Carrito y checkout optimizado',
       'Notificaciones por email y WhatsApp',
     ],
-    priceFrom: 'S/ 2,500',
+    priceFrom: 'S/ 500',
     delivery:  'Entrega en 20–30 días',
   },
   {
@@ -44,7 +44,7 @@ export const services: Service[] = [
       'Panel de administración de contenido',
       'SEO multipage y Google Analytics',
     ],
-    priceFrom: 'S/ 1,800',
+    priceFrom: 'S/ 400',
     delivery:  'Entrega en 15–20 días',
   },
   {
@@ -57,7 +57,7 @@ export const services: Service[] = [
       'Progreso del alumno y certificados',
       'Integración con Zoom o videos propios',
     ],
-    priceFrom: 'S/ 3,500',
+    priceFrom: 'S/ 700',
     delivery:  'Entrega en 30–45 días',
   },
   {
@@ -70,7 +70,7 @@ export const services: Service[] = [
       'Roles, permisos y autenticación segura',
       'API REST e integraciones con terceros',
     ],
-    priceFrom: 'S/ 5,000',
+    priceFrom: 'S/ 300',
     delivery:  'Cotización personalizada',
   },
   {
@@ -83,7 +83,7 @@ export const services: Service[] = [
       'Optimización de velocidad y Core Web Vitals',
       'Google Search Console y Analytics',
     ],
-    priceFrom: 'S/ 600',
+    priceFrom: 'S/ 100',
     delivery:  'Plan mensual disponible',
   },
 ];
