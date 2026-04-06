@@ -41,7 +41,7 @@ export const processSteps: ProcessStep[] = [
     ],
     metrics: [
       { icon: 'palette',  value: '3–5 días',     label: 'Duración de esta etapa' },
-      { icon: 'figma',    value: 'Figma',         label: 'Herramienta de diseño' },
+      { icon: 'figma',    value: 'Demo',         label: 'Herramienta de diseño' },
       { icon: 'refresh',  value: '2 revisiones',  label: 'Incluidas en el proceso' },
     ],
     nextLabel: 'Desarrollo',
@@ -90,7 +90,7 @@ export const processSteps: ProcessStep[] = [
     metrics: [
       { icon: 'rocket',   value: '1 día',         label: 'Tiempo de deploy' },
       { icon: 'shield',   value: '30 días',        label: 'Soporte post-lanzamiento' },
-      { icon: 'key',      value: 'Accesos totales', label: 'Hosting, dominio y código' },
+      { icon: 'key',      value: 'Accesos totales', label: 'Hosting, dominio y correos corporativos' },
     ],
   },
 ];

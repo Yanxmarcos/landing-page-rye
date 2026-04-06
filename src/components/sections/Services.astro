@@ -1,5 +1,6 @@
 ---
 import { services } from '../../data/services';
+import { cn } from '../../utils/cn';
 ---
 
 <section class="services section" id="servicios">
@@ -17,138 +18,29 @@ import { services } from '../../data/services';
 
     <div class="services__grid">
       {services.map((service, i) => (
-        <article
-          class="svc-card"
-          data-index={i}
-          role="button"
-          tabindex="0"
-          aria-expanded="false"
-          aria-label={`Ver detalle de ${service.title}`}
-        >
-          <!-- Glow de fondo -->
+        <article class={cn("svc-card", `reveal reveal-delay-${i + 1}`)}>
           <span class="svc-card__glow" aria-hidden="true"></span>
 
-          <!-- Header: siempre visible -->
-          <div class="svc-card__header">
+          <div class="svc-card__content">
             <span class="svc-card__tag">{service.tag}</span>
             <span class="svc-card__line" aria-hidden="true"></span>
             <h3 class="svc-card__title">{service.title}</h3>
             <p class="svc-card__desc">{service.description}</p>
-
-            <div class="svc-card__toggle">
-              <span class="svc-card__toggle-label">Ver más</span>
-              <span class="svc-card__toggle-icon" aria-hidden="true">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                  <path d="M5 1v8M1 5h8"
-                        stroke="#1E9FE8" stroke-width="1.6"
-                        stroke-linecap="round"/>
-                </svg>
-              </span>
-            </div>
           </div>
 
-          <!-- Body: se expande al click -->
-          <div class="svc-card__body" aria-hidden="true">
-            <div class="svc-card__body-inner">
-
-              <!-- Beneficios -->
-              <ul class="svc-card__benefits" role="list">
-                {service.benefits.map(benefit => (
-                  <li class="svc-card__benefit">
-                    <span class="svc-card__check" aria-hidden="true">
-                      <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                        <path d="M1 4l2 2 4-4"
-                              stroke="#1D9E75" stroke-width="1.4"
-                              stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </span>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-
-              <!-- Precio y entrega -->
-              <div class="svc-card__price-row">
-                <span class="svc-card__price-label">Desde</span>
-                <span class="svc-card__price-val">{service.priceFrom}</span>
-                <span class="svc-card__price-divider" aria-hidden="true"></span>
-                <span class="svc-card__price-label">{service.delivery}</span>
-              </div>
-
-              <!-- CTA -->
-              <a
-                href="#contacto"
-                class="svc-card__cta"
-                tabindex="-1"
-              >
-                Cotizar este servicio
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-                  <path d="M2 6.5h9M7.5 3l3.5 3.5L7.5 10"
-                        stroke="currentColor" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-
-            </div>
+          <div class="svc-card__actions">
+            <a href={`/servicios/${service.slug}`} class="btn btn--sm btn--ghost">
+              Ver más detalles
+            </a>
+            <a href="/#contacto" class="btn btn--sm btn--primary">
+              Cotizar
+            </a>
           </div>
         </article>
       ))}
     </div>
-
   </div>
 </section>
-
-<script>
-  const cards = document.querySelectorAll<HTMLElement>('.svc-card');
-
-  function openCard(card: HTMLElement) {
-    const body       = card.querySelector<HTMLElement>('.svc-card__body')!;
-    const label      = card.querySelector<HTMLElement>('.svc-card__toggle-label')!;
-    const cta        = card.querySelector<HTMLAnchorElement>('.svc-card__cta')!;
-
-    card.classList.add('svc-card--open');
-    card.setAttribute('aria-expanded', 'true');
-    body.setAttribute('aria-hidden', 'false');
-    label.textContent = 'Ver menos';
-    cta.setAttribute('tabindex', '0');
-  }
-
-  function closeCard(card: HTMLElement) {
-    const body  = card.querySelector<HTMLElement>('.svc-card__body')!;
-    const label = card.querySelector<HTMLElement>('.svc-card__toggle-label')!;
-    const cta   = card.querySelector<HTMLAnchorElement>('.svc-card__cta')!;
-
-    card.classList.remove('svc-card--open');
-    card.setAttribute('aria-expanded', 'false');
-    body.setAttribute('aria-hidden', 'true');
-    label.textContent = 'Ver más';
-    cta.setAttribute('tabindex', '-1');
-  }
-
-  cards.forEach(card => {
-    // Click en la card (excepto en el CTA)
-    card.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('.svc-card__cta')) return; // dejar que el link funcione
-
-      const isOpen = card.classList.contains('svc-card--open');
-
-      // Cerrar todas
-      cards.forEach(c => closeCard(c));
-
-      // Abrir la clickeada si estaba cerrada
-      if (!isOpen) openCard(card);
-    });
-
-    // Accesibilidad teclado
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-</script>
 
 <style>
   .services {
@@ -200,57 +92,47 @@ import { services } from '../../data/services';
   .svc-card {
     background: var(--color-surface-2);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    cursor: pointer;
     position: relative;
-    outline: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
     transition:
       border-color  0.28s var(--ease-out),
       box-shadow    0.28s var(--ease-out);
   }
 
-  .svc-card:focus-visible {
-    box-shadow: 0 0 0 3px rgba(30,159,232,0.35);
-  }
-
-  /* Borde superior azul→violeta al abrir */
-  .svc-card::after {
+  /* Borde superior azul en hover */
+  .svc-card:hover::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--color-blue), var(--color-violet));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s var(--ease-out);
-    pointer-events: none;
   }
 
-  .svc-card--open,
   .svc-card:hover {
     border-color: var(--color-border-hover);
+    transform: translateY(-4px);
   }
-
-  .svc-card--open::after { transform: scaleX(1); }
 
   /* --- Glow interior ------------------------------------ */
   .svc-card__glow {
     position: absolute;
-    inset: 0;
+    top: 0; left: 0;
     background: radial-gradient(ellipse 80% 60% at 15% 0%, rgba(30,159,232,0.07), transparent);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
   }
 
-  .svc-card--open .svc-card__glow,
   .svc-card:hover .svc-card__glow { opacity: 1; }
 
-  /* --- Header (siempre visible) ------------------------- */
-  .svc-card__header {
-    padding: 1.375rem 1.375rem 1rem;
+  /* --- Contenido ---------------------------------------- */
+  .svc-card__content {
     position: relative;
+    flex-grow: 1; /* Empuja los botones hacia abajo */
   }
 
   .svc-card__tag {
@@ -276,11 +158,10 @@ import { services } from '../../data/services';
     transition: width 0.35s var(--ease-out);
   }
 
-  .svc-card--open .svc-card__line,
   .svc-card:hover .svc-card__line { width: 44px; }
 
   .svc-card__title {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: 0.5rem;
@@ -294,154 +175,14 @@ import { services } from '../../data/services';
     line-height: 1.65;
   }
 
-  /* Fila toggle: "Ver más" + icono + -->
-  .svc-card__toggle {
+  /* --- Acciones / Botones ------------------------------- */
+  .svc-card__actions {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 2; /* Asegura que los botones sean clickeables por encima de efectos */
   }
-
-  .svc-card__toggle-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--color-blue);
-    transition: color 0.2s;
-  }
-
-  .svc-card__toggle-icon {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: rgba(30,159,232,0.1);
-    border: 1px solid rgba(30,159,232,0.22);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.35s var(--ease-out), background 0.2s;
-  }
-
-  /* El + rota a × al abrir */
-  .svc-card--open .svc-card__toggle-icon {
-    transform: rotate(45deg);
-    background: rgba(30,159,232,0.2);
-  }
-
-  /* --- Body expandible ---------------------------------- */
-  .svc-card__body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s var(--ease-out);
-  }
-
-  .svc-card--open .svc-card__body {
-    max-height: 380px;
-  }
-
-  .svc-card__body-inner {
-    padding: 0 1.375rem 1.375rem;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
-  }
-
-  /* --- Beneficios --------------------------------------- */
-  .svc-card__benefits {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    margin-bottom: 1.125rem;
-  }
-
-  .svc-card__benefit {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    line-height: 1.55;
-    /* Animación de entrada en cascada */
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: opacity 0.3s, transform 0.3s;
-  }
-
-  .svc-card--open .svc-card__benefit:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.10s; }
-  .svc-card--open .svc-card__benefit:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.18s; }
-  .svc-card--open .svc-card__benefit:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.26s; }
-  .svc-card--open .svc-card__benefit:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.34s; }
-
-  .svc-card__check {
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: rgba(29,158,117,0.12);
-    border: 1px solid rgba(29,158,117,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* --- Precio y entrega --------------------------------- */
-  .svc-card__price-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s 0.36s;
-  }
-
-  .svc-card--open .svc-card__price-row { opacity: 1; }
-
-  .svc-card__price-label {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-  }
-
-  .svc-card__price-val {
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .svc-card__price-divider {
-    width: 1px; height: 14px;
-    background: var(--color-border);
-    flex-shrink: 0;
-  }
-
-  /* --- CTA ---------------------------------------------- */
-  .svc-card__cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background: var(--color-blue);
-    color: #fff;
-    border-radius: var(--radius-full);
-    padding: 10px 0;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    text-decoration: none;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(6px);
-    transition:
-      opacity     0.3s 0.42s,
-      transform   0.3s 0.42s var(--ease-out),
-      background  0.2s;
-    pointer-events: none;
-  }
-
-  .svc-card--open .svc-card__cta {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .svc-card__cta:hover { background: var(--color-blue-dark); }
 
   /* --- Responsive --------------------------------------- */
   @media (max-width: 960px) {

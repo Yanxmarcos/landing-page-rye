@@ -27,17 +27,17 @@ export const contactConfig = {
     {
       id:    'tiktok',
       label: 'TikTok',
-      url:   'https://tiktok.com/@ryeweb',   // ← cambia
+      url:   'https://www.tiktok.com/@ryeweb.pe?_r=1&_t=ZS-95HkC57lX96',   // ← cambia
     },
     {
       id:    'facebook',
       label: 'Facebook',
-      url:   'https://facebook.com/ryeweb',  // ← cambia
+      url:   'https://www.facebook.com/share/1DRfM2EoDJ/',  // ← cambia
     },
     {
       id:    'instagram',
       label: 'Instagram',
-      url:   'https://instagram.com/ryeweb', // ← cambia
+      url:   'https://www.instagram.com/ryeweb.sac.pe?igsh=eDF0aWZ4ZW90ZHhk', // ← cambia
     },
   ],
 

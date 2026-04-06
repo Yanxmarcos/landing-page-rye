@@ -1,26 +1,25 @@
 ---
-import Button from '../ui/Button.astro';
 ---
 
 <section class="hero" id="inicio">
   <div class="hero__inner container">
 
-    <!-- Columna izquierda -->
+    <!-- Columna izquierda: copy -->
     <div class="hero__content">
 
-      <span class="hero__eyebrow">
+      <!-- <span class="hero__eyebrow">
         <span class="hero__eyebrow-dot" aria-hidden="true"></span>
-        Agencia de desarrollo web · Lima, Perú
-      </span>
+        Agencia de desarrollo web · Perú
+      </span> -->
 
       <h1 class="hero__title">
-        Tu negocio merece<br />
-        una web que <em>conquista</em>
+        TU ECOSISTEMA <br />
+        DIGITAL <em>TODO-EN-UNO</em>
       </h1>
 
       <p class="hero__description">
         Construimos sitios que convierten visitantes en clientes reales.
-        Landing pages, tiendas virtuales y sistemas web  con estrategia,
+        Landing pages, tiendas virtuales y sistemas web — con estrategia,
         diseño limpio y código que escala.
       </p>
 
@@ -28,130 +27,165 @@ import Button from '../ui/Button.astro';
         <a href="#contacto" class="hero__btn hero__btn--primary">
           Cotizar mi proyecto
         </a>
-          <!-- <a href="#portafolio" class="hero__btn hero__btn--ghost">
+        <!--
+        <a href="#portafolio" class="hero__btn hero__btn--ghost">
           Ver portafolio
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M2 7h10M8 3l4 4-4 4"
-                  stroke="currentColor" stroke-width="1.6"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a> -->
+        </a>
+        -->
       </div>
-
-      <!-- Stats -->
-     
 
     </div>
 
-    <!-- Columna derecha: browser mockup -->
+    <!-- =====================================================
+         Columna derecha: dispositivos animados
+         IMÁGENES: coloca tus screenshots en:
+           public/images/devices/laptop.jpg
+           public/images/devices/tablet.jpg
+           public/images/devices/movil-1.jpg
+           public/images/devices/movil-2.jpg
+         Si las imágenes no existen, se muestra un placeholder.
+    ===================================================== -->
     <div class="hero__visual" aria-hidden="true">
+      <div class="devices-scene" id="devices-scene">
 
-      <!-- Badge superior -->
-      <div class="hero__badge hero__badge--top">
-        <span class="hero__badge-icon hero__badge-icon--green">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M1.5 7l3.5 3.5 6.5-6.5"
-                  stroke="#1D9E75" stroke-width="1.6"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="hero__badge-text">
-          Conversiones +180%
-          <small>Último proyecto</small>
-        </span>
-      </div>
+        <!-- Glow de fondo -->
+        <span class="devices-glow"></span>
+        <span class="devices-reflection"></span>
 
-      <!-- Browser -->
-      <div class="browser">
-        <div class="browser__bar">
-          <span class="browser__dots">
-            <span class="browser__dot browser__dot--red"></span>
-            <span class="browser__dot browser__dot--yellow"></span>
-            <span class="browser__dot browser__dot--green"></span>
-          </span>
-          <span class="browser__url">
-            <span class="browser__url-dot"></span>
-            ryeweb.com
-          </span>
+        <!-- LAPTOP -->
+        <div class="device device--laptop" id="dev-laptop">
+          <div class="device-body">
+            <span class="device-notch"></span>
+            <div class="device-screen">
+              <img
+                src="laptop4.png"
+                alt="Sistema web en laptop"
+                loading="eager"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="device-placeholder">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <rect x="2" y="5" width="28" height="19" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10 29h12M16 24v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span>laptop.jpg</span>
+              </div>
+            </div>
+          </div>
+          <div class="device-base"></div>
+          <div class="device-foot"></div>
         </div>
 
-        <div class="browser__content">
-          <span class="browser__scan" aria-hidden="true"></span>
-
-          <!-- Mini navbar -->
-          <div class="mock-nav">
-            <span class="mock-nav__logo">RYE <em>WEB</em></span>
-            <div class="mock-nav__links">
-              <span></span><span></span>
-              <span class="mock-nav__cta"></span>
+        <!-- TABLET -->
+        <div class="device device--tablet" id="dev-tablet">
+          <div class="device-body">
+            <div class="device-screen">
+              <img
+                src="tablet.png"
+                alt="Sistema web en tablet"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="device-placeholder">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="1" width="20" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="12" cy="19" r="1.2" fill="currentColor"/>
+                </svg>
+                <span>tablet.jpg</span>
+              </div>
             </div>
-          </div>
-
-          <!-- Mini hero -->
-          <span class="mock-tag">Desarrollo Web</span>
-          <p class="mock-title">
-            Conecta. Crea.<br /><em>Acelera.<span class="mock-cursor"></span></em>
-          </p>
-
-          <div class="mock-lines">
-            <span></span><span></span>
-            <span class="mock-lines__short"></span>
-          </div>
-
-          <div class="mock-btns">
-            <span class="mock-btn mock-btn--primary">Cotizar</span>
-            <span class="mock-btn mock-btn--ghost">Portafolio</span>
-          </div>
-
-          <div class="mock-stats">
-            <div class="mock-stat">
-              <span class="mock-stat__num">30<em>+</em></span>
-              <span class="mock-stat__lbl">Proyectos</span>
-            </div>
-            <div class="mock-stat">
-              <span class="mock-stat__num">100<em>%</em></span>
-              <span class="mock-stat__lbl">Satisfechos</span>
-            </div>
-            <div class="mock-stat">
-              <span class="mock-stat__num">3<em>x</em></span>
-              <span class="mock-stat__lbl">Conversiones</span>
-            </div>
+            <span class="device-home-btn"></span>
           </div>
         </div>
-      </div>
 
-      <!-- Badge inferior -->
-      <div class="hero__badge hero__badge--bottom">
-        <span class="hero__badge-icon hero__badge-icon--blue">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <rect x="1.5" y="4.5" width="10" height="7.5" rx="2"
-                  stroke="#1E9FE8" stroke-width="1.2"/>
-            <path d="M4.5 4.5V3.5a2.5 2.5 0 015 0v1"
-                  stroke="#1E9FE8" stroke-width="1.2"/>
-          </svg>
-        </span>
-        <span class="hero__badge-text">
-          SSL + Seguridad
-          <small>Incluido siempre</small>
-        </span>
-      </div>
+        <!-- MÓVIL izquierdo -->
+        <div class="device device--phone device--phone-left" id="dev-phone-l">
+          <div class="device-body">
+            <span class="device-notch device-notch--sm"></span>
+            <div class="device-screen">
+              <img
+                src="celular0.jpeg"
+                alt="App en móvil"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="device-placeholder">
+                <svg width="8" height="18" viewBox="0 0 18 18" fill="none">
+                  <rect x="2" y="1" width="14" height="36" rx="2.5" stroke="currentColor" stroke-width="1.3"/>
+                </svg>
+                <span>movil-1.jpg</span>
+              </div>
+            </div>
+            <span class="device-home-bar"></span>
+          </div>
+        </div>
 
+        <!-- MÓVIL derecho -->
+        <div class="device device--phone device--phone-right" id="dev-phone-r">
+          <div class="device-body">
+            <span class="device-notch device-notch--sm"></span>
+            <div class="device-screen">
+              <img
+                src="celular4.png"
+                alt="App en móvil"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="device-placeholder">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <rect x="2" y="1" width="14" height="16" rx="2.5" stroke="currentColor" stroke-width="1.3"/>
+                </svg>
+                <span>movil-2.jpg</span>
+              </div>
+            </div>
+            <span class="device-home-bar"></span>
+          </div>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </section>
 
+<script>
+  const scene = document.getElementById('devices-scene');
+  const laptop = document.getElementById('dev-laptop');
+  const allDevices = scene?.querySelectorAll<HTMLElement>('.device');
+
+  // Pausar animaciones al hacer hover
+  scene?.addEventListener('mouseenter', () => {
+    allDevices?.forEach(d => d.style.animationPlayState = 'paused');
+  });
+
+  scene?.addEventListener('mouseleave', () => {
+    allDevices?.forEach(d => d.style.animationPlayState = 'running');
+    if (laptop) laptop.style.transform = '';
+  });
+
+  // Tilt 3D suave con el mouse
+  scene?.addEventListener('mousemove', (e: MouseEvent) => {
+    if (!laptop || !scene) return;
+    const rect  = scene.getBoundingClientRect();
+    const cx    = rect.left + rect.width  / 2;
+    const cy    = rect.top  + rect.height / 2;
+    const dx    = (e.clientX - cx) / (rect.width  / 2);
+    const dy    = (e.clientY - cy) / (rect.height / 2);
+    laptop.style.transform = `rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg) translateZ(0)`;
+  });
+</script>
+
 <style>
   /* =====================================================
-     HERO — estilos encapsulados en este componente
+     HERO — layout base
   ===================================================== */
-
   .hero {
     min-height: 100svh;
     display: flex;
     align-items: center;
     padding-top: 5rem;
     background:
-      radial-gradient(ellipse 55% 60% at 72% 30%, rgba(30,159,232,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 72% 30%, rgba(219, 226, 230, 0.08) 0%, transparent 65%),
       radial-gradient(ellipse 40% 50% at 15% 78%, rgba(91,79,212,0.06) 0%, transparent 60%),
       var(--color-bg);
     position: relative;
@@ -164,8 +198,8 @@ import Button from '../ui/Button.astro';
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(30,159,232,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30,159,232,0.03) 1px, transparent 1px);
+      linear-gradient(var(--color-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
   }
@@ -173,13 +207,13 @@ import Button from '../ui/Button.astro';
   .hero__inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    gap: 4rem;
     align-items: center;
     position: relative;
     z-index: 1;
   }
 
-  /* --- Eyebrow pill ------------------------------------ */
+  /* --- Eyebrow ----------------------------------------- */
   .hero__eyebrow {
     display: inline-flex;
     align-items: center;
@@ -211,9 +245,9 @@ import Button from '../ui/Button.astro';
   /* --- Título ------------------------------------------ */
   .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5vw, 4.75rem);
-    font-weight: 800;
-    line-height: 1.04;
+    font-size: clamp(2.5rem, 5vw, 4.75rem);
+    font-weight: 700;
+    line-height: 1.05;
     letter-spacing: -0.04em;
     color: var(--color-text);
     margin-bottom: 1.375rem;
@@ -240,7 +274,6 @@ import Button from '../ui/Button.astro';
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
     animation: hero-fade-up 0.65s 0.24s var(--ease-out) both;
   }
 
@@ -253,7 +286,7 @@ import Button from '../ui/Button.astro';
     font-size: 0.9375rem;
     padding: 0.875rem 2rem;
     text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
+    transition: opacity 0.2s, transform 0.2s, background 0.3s, border-color 0.3s;
     cursor: pointer;
     border: none;
   }
@@ -271,375 +304,316 @@ import Button from '../ui/Button.astro';
   .hero__btn--ghost {
     background: transparent;
     color: var(--color-text);
-    border: 1px solid rgba(240,240,240,0.12);
+    border: 1px solid var(--color-border-solid);
   }
 
   .hero__btn--ghost:hover {
-    background: rgba(30,159,232,0.06);
-    border-color: rgba(30,159,232,0.35);
+    background: var(--color-surface-2);
+    border-color: var(--color-border-hover);
   }
 
-  /* --- Stats ------------------------------------------- */
-  .hero__stats {
-    display: flex;
-    gap: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
-    animation: hero-fade-up 0.65s 0.32s var(--ease-out) both;
-    flex-wrap: wrap;
-  }
-
-  .hero__stat-number {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: var(--color-text);
-    line-height: 1;
-  }
-
-  .hero__stat-number em {
-    font-style: normal;
-    color: var(--color-blue);
-  }
-
-  .hero__stat-label {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--color-text-muted);
-    margin-top: 5px;
-    line-height: 1.45;
-  }
-
-  /* --- Visual: browser mockup -------------------------- */
+  /* =====================================================
+     DEVICES SCENE
+  ===================================================== */
   .hero__visual {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     animation: hero-fade-up 0.8s 0.2s var(--ease-out) both;
+    min-height: 380px;
   }
 
-  /* --- Badges flotantes -------------------------------- */
-  .hero__badge {
-    position: absolute;
-    background: var(--color-surface-2);
-    border: 1px solid rgba(30,159,232,0.22);
-    border-radius: 12px;
-    padding: 9px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--color-text);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-    z-index: 10;
-  }
-
-  .hero__badge small {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--color-text-muted);
-    margin-top: 1px;
-  }
-
-  .hero__badge-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hero__badge--top {
-    top: -14px;
-    right: -16px;
-    animation: badge-float 4.5s 1s ease-in-out infinite;
-  }
-
-  .hero__badge--bottom {
-    bottom: 10px;
-    left: -20px;
-    animation: badge-float 4s 0.5s ease-in-out infinite;
-  }
-
-  .hero__badge-icon {
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .hero__badge-icon--green { background: rgba(29,158,117,0.14); }
-  .hero__badge-icon--blue  { background: rgba(30,159,232,0.14); }
-
-  /* --- Browser ----------------------------------------- */
-  .browser {
-    width: 100%;
-    max-width: 380px;
-    background: #0D1B2A;
-    border: 1px solid rgba(30,159,232,0.18);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(30,159,232,0.06);
-    animation: browser-float 5s ease-in-out infinite;
-  }
-
-  .browser__bar {
-    background: #0A1520;
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid rgba(30,159,232,0.1);
-  }
-
-  .browser__dots { display: flex; gap: 5px; }
-
-  .browser__dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    opacity: 0.7;
-  }
-
-  .browser__dot--red    { background: #E24B4A; }
-  .browser__dot--yellow { background: #EF9F27; }
-  .browser__dot--green  { background: #1D9E75; }
-
-  .browser__url {
-    flex: 1;
-    background: rgba(30,159,232,0.06);
-    border: 1px solid rgba(30,159,232,0.1);
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 10px;
-    color: var(--color-text-muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .browser__url-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #1D9E75;
-    flex-shrink: 0;
-  }
-
-  .browser__content {
-    padding: 18px 18px 22px;
+  .devices-scene {
     position: relative;
-    overflow: hidden;
+    width: 100%;
+    height: 380px;
+    perspective: 1000px;
+    cursor: default;
   }
 
-  /* Scan line */
-  .browser__scan {
+  /* Glow base */
+  .devices-glow {
     position: absolute;
-    left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(30,159,232,0.28), transparent);
-    animation: scan-line 3.5s linear infinite;
+    bottom: -20px; left: 50%;
+    transform: translateX(-50%);
+    width: 70%; height: 60px;
+    background: radial-gradient(ellipse, rgba(30,159,232,0.14) 0%, transparent 70%);
+    filter: blur(12px);
     pointer-events: none;
   }
 
-  @keyframes scan-line {
-    0%   { top: 0; }
-    100% { top: 100%; }
+  .devices-reflection {
+    position: absolute;
+    bottom: -4px; left: 50%;
+    transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(30,159,232,0.35), transparent);
+    pointer-events: none;
   }
 
-  /* Mini navbar */
-  .mock-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
+  /* ---- Cuerpo base de dispositivos ------------------- */
+  .device-body {
+    background: linear-gradient(145deg, #1E2A3A, #141E2C);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    position: relative;
   }
 
-  .mock-nav__logo {
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--color-text);
-    letter-spacing: -0.01em;
+  .device-screen {
+    background: #070D17;
+    overflow: hidden;
+    position: relative;
   }
 
-  .mock-nav__logo em {
-    font-style: normal;
-    color: var(--color-blue);
-  }
-
-  .mock-nav__links {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .mock-nav__links span {
+  .device-screen img {
+    width: 100%; height: 100%;
+    object-fit: cover;
     display: block;
-    width: 20px; height: 4px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 3px;
   }
 
-  .mock-nav__cta {
-    background: var(--color-blue) !important;
-    width: 28px !important;
-    height: 14px !important;
-    border-radius: 20px !important;
-    opacity: 0.85;
-  }
-
-  /* Mini hero content */
-  .mock-tag {
-    display: inline-block;
-    font-size: 7.5px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-blue);
-    border: 1px solid rgba(30,159,232,0.28);
-    border-radius: 100px;
-    padding: 2px 8px;
-    margin-bottom: 8px;
-  }
-
-  .mock-title {
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--color-text);
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-
-  .mock-title em {
-    font-style: normal;
-    color: var(--color-blue);
-  }
-
-  .mock-cursor {
-    display: inline-block;
-    width: 2px; height: 13px;
-    background: var(--color-blue);
-    margin-left: 2px;
-    vertical-align: middle;
-    animation: cursor-blink 1s step-end infinite;
-  }
-
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0; }
-  }
-
-  .mock-lines {
-    display: flex;
+  /* Placeholder cuando no hay imagen */
+  .device-placeholder {
+    display: none; /* onerror lo activa */
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #0B1420, #0F1D2E);
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    gap: 4px;
-    margin-bottom: 12px;
+    gap: 6px;
+    color: rgba(30,159,232,0.35);
+    font-size: 9px;
+    text-align: center;
+    padding: 8px;
   }
 
-  .mock-lines span {
+  .device-notch {
     display: block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    position: absolute;
+    top: 4px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .device-notch--sm {
+    width: 22px; height: 4px;
+    border-radius: 2px;
+    position: relative;
+    top: auto; left: auto;
+    transform: none;
+    margin: 0 auto 3px;
+    display: block;
+  }
+
+  .device-home-btn {
+    display: block;
+    width: 32px; height: 4px;
+    background: rgba(255,255,255,0.14);
+    border-radius: 2px;
+    margin: 5px auto 2px;
+  }
+
+  .device-home-bar {
+    display: block;
+    width: 28px; height: 3px;
+    background: rgba(229, 221, 221, 0.14);
+    border-radius: 2px;
+    margin: 4px auto 2px;
+  }
+
+  /* ---- LAPTOP ---------------------------------------- */
+  .device--laptop {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 450px;
+    z-index: 2;
+    animation: float-laptop 6s ease-in-out infinite;
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+  }
+
+  .device--laptop .device-body {
+    border-radius: 5px 4px 0 0;
+    border-bottom: none;
+    padding: 7px 7px 4px;
+  }
+
+  .device--laptop .device-screen {
+    border-radius: 5px;
+    aspect-ratio: 16/10;
+    border: 1px solid rgba(47, 40, 131, 0.18);
+  }
+
+  .device-base {
+    height: 10px;
+    background: linear-gradient(to bottom, #1A2438, #101824);
+    border-radius: 0 0 3px 3px;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-top: none;
+  }
+
+  .device-foot {
     height: 4px;
-    background: rgba(122,143,166,0.18);
-    border-radius: 3px;
+    width: 75%;
+    margin: 0 auto;
+    background: #0C1520;
+    border-radius: 0 0 6px 6px;
   }
 
-  .mock-lines__short { width: 68% !important; }
-
-  .mock-btns {
-    display: flex;
-    gap: 7px;
-    margin-bottom: 14px;
+  /* ---- TABLET ---------------------------------------- */
+  .device--tablet {
+    position: absolute;
+    bottom: 5px;
+    right: calc(35% - 220px);
+    width: 185px;
+    z-index: 3;
+    animation: float-tablet 5.5s 0.5s ease-in-out infinite;
   }
 
-  .mock-btn {
-    font-size: 8px;
-    font-weight: 700;
-    padding: 5px 13px;
-    border-radius: 100px;
-    display: inline-block;
+  .device--tablet .device-body {
+    border-radius: 10px;
+    padding: 2px;
   }
 
-  .mock-btn--primary {
-    background: var(--color-blue);
-    color: #fff;
+  .device--tablet .device-screen {
+    border-radius: 5px;
+    aspect-ratio: 3/4;
+    border: 1px solid rgba(49, 120, 174, 0.18);
   }
 
-  .mock-btn--ghost {
-    background: transparent;
-    color: var(--color-text);
-    border: 1px solid rgba(255,255,255,0.12);
+  /* ---- PHONES ---------------------------------------- */
+  .device--phone {
+    position: absolute;
+    z-index: 6;
   }
 
-  .mock-stats {
-    display: flex;
-    gap: 14px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(30,159,232,0.1);
+  .device--phone-left {
+    bottom: 1px;
+    left: calc(40% - 210px);
+    width: 92px;
+    animation: float-phone-l 5s 1s ease-in-out infinite;
   }
 
-  .mock-stat__num {
-    display: block;
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--color-text);
-    line-height: 1;
+  .device--phone-right {
+    bottom: 15px;
+    right: calc(36% - 280px);
+    width: 92px;
+    animation: float-phone-r 4.8s 0.8s ease-in-out infinite;
   }
 
-  .mock-stat__num em {
-    font-style: normal;
-    color: var(--color-blue);
+  .device--phone .device-body {
+    border-radius: 19px;
+    padding: 1px;
   }
 
-  .mock-stat__lbl {
-    display: block;
-    font-size: 8px;
-    color: var(--color-text-muted);
-    margin-top: 2px;
+  .device--phone .device-screen {
+    border-radius: 8px;
+    aspect-ratio: 9/18;
+    border: 1px solid rgba(212, 223, 230, 0.18);
   }
 
-  /* --- Keyframes --------------------------------------- */
+  /* =====================================================
+     ANIMACIONES DE FLOTACIÓN
+  ===================================================== */
+  @keyframes float-laptop {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-55%) translateY(-10px); }
+  }
+
+  @keyframes float-tablet {
+    0%, 100% { transform: translateY(0)   rotate(2deg); }
+    50%       { transform: translateY(-12px) rotate(2deg); }
+  }
+
+  @keyframes float-phone-l {
+    0%, 100% { transform: translateY(0)   rotate(-3deg); }
+    50%       { transform: translateY(-14px) rotate(-3deg); }
+  }
+
+  @keyframes float-phone-r {
+    0%, 100% { transform: translateY(0)  rotate(4deg); }
+    50%       { transform: translateY(-10px) rotate(4deg); }
+  }
+
+  /* =====================================================
+     KEYFRAMES HERO
+  ===================================================== */
   @keyframes hero-fade-up {
     from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes browser-float {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-10px); }
+  /* =====================================================
+     MODO CLARO — ajustes
+  ===================================================== */
+  [data-theme="light"] .hero {
+    background:
+      radial-gradient(ellipse 55% 60% at 72% 30%, rgba(30,159,232,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 15% 78%, rgba(91,79,212,0.04) 0%, transparent 60%),
+      #FFFFFF;
   }
 
-  @keyframes badge-float {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-6px); }
+  [data-theme="light"] .device-body {
+    background: linear-gradient(145deg, #C8D8EC, #D8E6F2);
+    border-color: rgba(10,22,40,0.15);
   }
 
-  /* --- Responsive -------------------------------------- */
+  [data-theme="light"] .device-screen {
+    background: #E8F0F8;
+    border-color: rgba(30,159,232,0.25);
+  }
+
+  [data-theme="light"] .devices-glow {
+    background: radial-gradient(ellipse, rgba(30,159,232,0.18) 0%, transparent 70%);
+  }
+
+  /* =====================================================
+     RESPONSIVO
+  ===================================================== */
   @media (max-width: 900px) {
     .hero__inner {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
 
-    .hero__visual { display: none; }
+    .hero__visual { min-height: 280px; }
 
-    .hero__title { font-size: clamp(2.2rem, 7vw, 3.5rem); }
+    .devices-scene { height: 440px; }
+
+.device--laptop     { width: 380px; }
+.device--tablet     { width: 135px; right: calc(50% - 260px); }
+.device--phone-left { width: 92px;  left: calc(50% - 255px); }
+.device--phone-right{ width: 82px;  right: calc(50% - 330px); bottom: 45px; }
   }
 
-  @media (max-width: 500px) {
-    .hero__stats { gap: 1.5rem; }
+  @media (max-width: 480px) {
+  .hero__visual {
+    display: flex;        /* ← ya no se oculta */
+    min-height: 220px;
   }
 
+  .devices-scene {
+    height: 220px;
+    transform: scale(0.72);
+    transform-origin: center top;
+  }
+
+  .device--laptop      { width: 280px; }
+  .device--tablet      { width: 100px; right: calc(50% - 195px); }
+  .device--phone-left  { width: 68px;  left: calc(50% - 190px); }
+  .device--phone-right { width: 68px;  right: calc(50% - 240px); bottom: 35px; }
+}
+
+  /* Reduce motion */
   @media (prefers-reduced-motion: reduce) {
-    .hero__eyebrow-dot,
-    .browser__scan,
-    .mock-cursor,
-    .browser,
-    .hero__badge--top,
-    .hero__badge--bottom {
-      animation: none;
-    }
+    .device--laptop,
+    .device--tablet,
+    .device--phone-left,
+    .device--phone-right { animation: none; }
+    .hero__eyebrow-dot { animation: none; }
   }
 </style>
