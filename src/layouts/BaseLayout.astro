@@ -1,0 +1,95 @@
+---
+import SEO              from '../components/seo/SEO.astro';
+import Navbar           from '../components/common/Navbar.astro';
+import Footer           from '../components/common/Footer.astro';
+import WhatsappFloat    from '../components/common/WhatsappFloat.astro';
+import ScrollAnimations from '../components/common/ScrollAnimations.astro';
+import '../styles/global.css';
+
+interface Props {
+  title:       string;
+  description: string;
+  image?:      string;
+}
+
+const { title, description, image } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- =====================================================
+         TIPOGRAFÍA
+         Clash Display → títulos premium (--font-display)
+         Inter         → cuerpo de texto (--font-body)
+    ===================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--
+      Clash Display no está en Google Fonts — se carga desde
+      CDN de Fontshare (servicio gratuito y rápido)
+    -->
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <SEO {title} {description} {image} />
+
+    <!--
+      ANTI-FLASH DE TEMA:
+      Este script inline se ejecuta ANTES de que el navegador
+      pinte nada, evitando el parpadeo blanco→negro al cargar.
+      DEBE estar en el <head>, NO diferido.
+    -->
+    <script is:inline>
+      (function() {
+        try {
+          const saved = localStorage.getItem('rye-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          // Si guardó preferencia → úsala. Si no → usa la del sistema.
+          const theme = saved || (prefersDark ? 'dark' : 'light');
+          if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+          // El modo oscuro es default (sin atributo) — no hace falta setear nada
+        } catch(e) {}
+      })();
+    </script>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "RYE WEB",
+      "description": "Agencia de desarrollo web especializada en landing pages, tiendas virtuales y sistemas web a medida.",
+      "url": "https://ryeweb.com",
+      "email": "ryeweb.sac@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lima",
+        "addressCountry": "PE"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <Navbar />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsappFloat />
+    <ScrollAnimations />
+  </body>
+</html>
