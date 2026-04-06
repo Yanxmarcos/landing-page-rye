@@ -1,0 +1,1278 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services } from '../../data/services';
+
+const service = services.find(s => s.slug === 'paginas-de-aterrizaje');
+
+if (!service) {
+  throw new Error("No se encontraron los datos para el servicio 'paginas-de-aterrizaje'.");
+}
+
+// Ejemplos de diseños para la galería rotativa
+// Reemplaza las URLs con screenshots reales cuando los tengas
+// Colócalos en: public/images/gallery/landing-*.jpg
+const gallerySlides = [
+  { url: 'cliente-dental.pe',          name: 'Clínica DentPro · Lima',            img: '/images/dental.png'      },
+  { url: 'bienvivir-inmobiliaria.com',  name: 'BienVivir Inmobiliaria · Lima',     img: '/images/inmoviliaria.png' },
+  { url: 'sabores-del-norte.pe',        name: 'Sabores del Norte · Trujillo',      img: '/images/norte.png'  },
+  { url: 'fitpro-academia.pe',          name: 'Academia FitPro · Lima',            img: '/images/fitopro.png'},
+];
+
+// Beneficios adicionales (complementa los de services.ts)
+const extraFeatures = [
+  {
+    title: 'Diseño orientado a conversión',
+    desc:  'Jerarquía visual clara, CTAs estratégicos y flujo que guía al usuario hacia la acción.',
+    icon:  'star',
+  },
+  {
+    title: 'Carga ultrarrápida',
+    desc:  'Construido con Astro — 0 JavaScript innecesario. Lighthouse 90+ garantizado.',
+    icon:  'zap',
+  },
+  {
+    title: 'SEO técnico integrado',
+    desc:  'Meta tags, Schema.org, Open Graph y estructura semántica desde el primer día.',
+    icon:  'search',
+  },
+  {
+    title: 'Mobile-first',
+    desc:  'Diseño que se ve perfecto en cualquier pantalla — desde móvil hasta 4K.',
+    icon:  'globe',
+  },
+];
+---
+
+<BaseLayout
+  title={`${service.title} | RYE WEB`}
+  description={service.description}
+>
+  <article
+    class="service-page"
+    style="--accent-hex: #4F46E5; --accent-rgb: 79, 70, 229;"
+  >
+
+    <!-- =====================================================
+         HERO — alineado a la izquierda (corregido)
+    ===================================================== -->
+    <header class="s-hero">
+      <div class="container s-hero__inner">
+
+        <div class="s-hero__content">
+          <div class="s-badge">
+            <span class="s-badge__dot"></span>
+            {service.tag}
+          </div>
+
+          <h1 class="s-hero__title">
+            Diseño que atrapa.<br />
+            <span class="s-accent">Experiencias que convierten.</span>
+          </h1>
+
+          <p class="s-hero__desc">{service.description}</p>
+
+          <div class="s-hero__actions">
+            <a href="/#contacto" class="s-btn-primary">
+              Solicitar propuesta
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7h10M7.5 3l4.5 4-4.5 4"
+                      stroke="currentColor" stroke-width="1.6"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mini stats a la derecha del hero -->
+        <div class="s-hero__stats">
+          <div class="s-stat">
+            <span class="s-stat__val">+180%</span>
+            <span class="s-stat__lbl">Conversiones promedio</span>
+          </div>
+          <div class="s-stat">
+            <span class="s-stat__val">9 días</span>
+            <span class="s-stat__lbl">Entrega típica</span>
+          </div>
+          <div class="s-stat">
+            <span class="s-stat__val">98/100</span>
+            <span class="s-stat__lbl">Lighthouse score</span>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- =====================================================
+         GALERÍA ROTATIVA — diseños de ejemplo
+    ===================================================== -->
+    <section class="s-gallery">
+      <div class="container">
+
+        <p class="s-section-label">Ejemplos de diseño</p>
+
+        <div class="s-gallery__frame" id="gallery-frame">
+
+          <!-- Barra del browser -->
+          <div class="s-gallery__bar">
+            <div class="s-gallery__dots">
+              <span style="background:#ef4444"></span>
+              <span style="background:#f59e0b"></span>
+              <span style="background:#10b981"></span>
+            </div>
+            <div class="s-gallery__url">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <rect x="1" y="3" width="8" height="6" rx="1.5" stroke="#10b981" stroke-width="1.2"/>
+                <path d="M3.5 3V2.5a1.5 1.5 0 013 0V3" stroke="#10b981" stroke-width="1.2"/>
+              </svg>
+              <span id="gallery-url">cliente-dental.pe</span>
+            </div>
+          </div>
+
+          <!-- Slides -->
+          <div class="s-gallery__slides" id="gallery-slides">
+            {gallerySlides.map((slide, i) => (
+              <div
+                class:list={['s-slide', i === 0 && 's-slide--active']}
+                data-index={i}
+              >
+                {/* Si hay imagen real, se muestra; si no, se muestra el mockup CSS */}
+                <img
+                  src={slide.img}
+                  alt={slide.name}
+                  class="s-slide__img"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                {/* Mockup CSS como fallback */}
+                <div class="s-slide__mock" style="display:none;">
+                  <div class="mock-nav-strip">
+                    <div class="mock-logo"></div>
+                    <div class="mock-links">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <div class="mock-cta-sm"></div>
+                  </div>
+                  <div class="mock-hero-strip">
+                    <div class="mock-copy-col">
+                      <div class="mock-h"></div>
+                      <div class="mock-h mock-h--short"></div>
+                      <div class="mock-p"></div>
+                      <div class="mock-p mock-p--short"></div>
+                      <div class="mock-btn-row">
+                        <div class="mock-btn-p"></div>
+                        <div class="mock-btn-g"></div>
+                      </div>
+                    </div>
+                    <div class="mock-visual-col">
+                      <div class="mock-visual-box"></div>
+                    </div>
+                  </div>
+                  <div class="mock-cards-strip">
+                    <div class="mock-card"></div>
+                    <div class="mock-card"></div>
+                    <div class="mock-card"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Controles -->
+          <div class="s-gallery__controls">
+            <span class="s-gallery__slide-name" id="gallery-slide-name">
+              {gallerySlides[0].name}
+            </span>
+            <div class="s-gallery__dots-nav" id="gallery-dots">
+              {gallerySlides.map((_, i) => (
+                <button
+                  class:list={['s-dot', i === 0 && 's-dot--active']}
+                  data-slide={i}
+                  aria-label={`Ir al slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FEATURES — 4 cards interactivas
+    ===================================================== -->
+    <section class="s-features">
+      <div class="container">
+        <p class="s-section-label">Lo que incluye</p>
+        <h2 class="s-section-title">Todo lo que necesitas para convertir</h2>
+
+        <div class="s-features__grid">
+          {extraFeatures.map(feat => (
+            <div class="s-feat-card">
+              <span class="s-feat-card__glow" aria-hidden="true"></span>
+              <div class="s-feat-card__icon" aria-hidden="true">
+                {feat.icon === 'star' && (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2l1.8 3.6 4 .6-2.9 2.8.7 4L9 11.1l-3.6 1.9.7-4L3.2 6.2l4-.6z"
+                          fill="currentColor"/>
+                  </svg>
+                )}
+                {feat.icon === 'zap' && (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M10 2L4 10h6l-2 6 8-10h-6l2-4z"
+                          stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                )}
+                {feat.icon === 'search' && (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round"/>
+                  </svg>
+                )}
+                {feat.icon === 'globe' && (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9 2c-2 2-3 4.5-3 7s1 5 3 7M9 2c2 2 3 4.5 3 7s-1 5-3 7M2 9h14"
+                          stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                )}
+              </div>
+              <h3 class="s-feat-card__title">{feat.title}</h3>
+              <p class="s-feat-card__desc">{feat.desc}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BENEFICIOS de services.ts + SIDEBAR
+    ===================================================== -->
+    <section class="s-details">
+      <div class="container s-details__grid">
+
+        <main class="s-details__main">
+          <h2 class="s-section-title">Beneficios clave</h2>
+          <p class="s-section-sub">
+            Esto es lo que obtienes con nuestro servicio de
+            <strong>{service.title.toLowerCase()}</strong>.
+          </p>
+          <div class="s-benefits">
+            {service.benefits.map(benefit => (
+              <div class="s-benefit">
+                <span class="s-benefit__icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7l3.5 3.5 6.5-6.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <p class="s-benefit__text">{benefit}</p>
+              </div>
+            ))}
+          </div>
+        </main>
+
+        <!-- Sidebar sticky -->
+        <aside class="s-sidebar">
+          <div class="s-sidebar__card">
+            <div class="s-sidebar__header">
+              <h3 class="s-sidebar__title">Resumen del servicio</h3>
+              <p class="s-sidebar__sub">Desarrollo web a medida</p>
+            </div>
+            <div class="s-sidebar__price-row">
+              <div class="s-price-col">
+                <span class="s-price-label">Precio desde</span>
+                <span class="s-price-val">{service.priceFrom}</span>
+              </div>
+              <div class="s-price-col s-price-col--accent">
+                <span class="s-price-label">Entrega en</span>
+                <span class="s-price-time">{service.delivery}</span>
+              </div>
+            </div>
+            <a href="/#contacto" class="s-btn-primary s-btn-primary--full">
+              Cotizar este proyecto
+            </a>
+            <ul class="s-sidebar__checks">
+              {service.benefits.map(pill => (
+                <li>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2 6l2.8 2.8 5.2-5.2"
+                          stroke="#10b981" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {pill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PROCESO — accordion interactivo
+    ===================================================== -->
+    <section class="s-process">
+      <div class="container">
+        <p class="s-section-label">Cómo trabajamos</p>
+        <h2 class="s-section-title">De la idea al lanzamiento</h2>
+
+        <ol class="s-process__steps" id="proc-steps">
+          {[
+            { n:'01', t:'Brief y estrategia',   d:'Analizamos tu negocio, audiencia y competencia. Definimos el mensaje central y el objetivo de conversión.' },
+            { n:'02', t:'Diseño',       d:'Wireframes y diseño visual completo. Tú apruebas cada pantalla antes de escribir una línea de código.' },
+            { n:'03', t:'Desarrollo',            d:'Astro + Tailwind. Código limpio, rápido y con SEO técnico desde el inicio. Mobile-first siempre.' },
+            { n:'04', t:'Revisión y ajustes',    d:'URL de staging para que veas el resultado real en vivo. 2 rondas de cambios incluidas sin costo extra.' },
+            { n:'05', t:'Lanzamiento',           d:'Deploy, dominio, Google Analytics y Search Console configurados. Tu landing sale lista para competir.' },
+          ].map((step, i) => (
+            <li
+              class:list={['s-proc-step', i === 0 && 's-proc-step--active']}
+              data-index={i}
+            >
+              <div class="s-proc-step__spine" aria-hidden="true">
+                <span class="s-proc-step__dot"></span>
+                <span class="s-proc-step__line"></span>
+              </div>
+              <div class="s-proc-step__body">
+                <span class="s-proc-step__num">{step.n}</span>
+                <button class="s-proc-step__trigger">
+                  <span class="s-proc-step__title">{step.t}</span>
+                  <svg class="s-proc-step__chevron" width="13" height="13"
+                       viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <path d="M2.5 4.5l4 4 4-4"
+                          stroke="currentColor" stroke-width="1.6"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <div class="s-proc-step__detail">
+                  <p>{step.d}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CTA FINAL
+    ===================================================== -->
+    <section class="s-cta">
+      <div class="container">
+        <div class="s-cta__banner">
+          <h2 class="s-cta__title">¿Listo para empezar tu proyecto?</h2>
+          <p class="s-cta__desc">
+            Hablemos sobre cómo podemos ayudarte a impulsar tus conversiones.
+            Sin compromiso — te respondemos en menos de 24 horas.
+          </p>
+          <a href="/#contacto" class="s-btn-primary">
+            Contáctanos ahora
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</BaseLayout>
+
+<!-- =========================================================
+     SCRIPTS
+========================================================= -->
+<script>
+  /* ---- Galería rotativa -------------------------------- */
+  const slides     = document.querySelectorAll<HTMLElement>('.s-slide');
+  const dots       = document.querySelectorAll<HTMLButtonElement>('.s-dot');
+  const urlEl      = document.getElementById('gallery-url')!;
+  const nameEl     = document.getElementById('gallery-slide-name')!;
+
+  const slideData = [
+    { url: 'cliente-dental.pe',         name: 'Clínica DentPro · Lima'          },
+    { url: 'bienvivir-inmobiliaria.com', name: 'BienVivir Inmobiliaria · Lima'   },
+    { url: 'sabores-del-norte.pe',       name: 'Sabores del Norte · Trujillo'    },
+    { url: 'fitpro-academia.pe',         name: 'Academia FitPro · Lima'          },
+  ];
+
+  let current = 0;
+  let autoTimer = setInterval(() => goSlide((current + 1) % slides.length), 3500);
+
+  function goSlide(n: number) {
+    slides[current].classList.remove('s-slide--active');
+    slides[current].classList.add('s-slide--exit');
+    setTimeout(() => slides[current].classList.remove('s-slide--exit'), 600);
+    current = n;
+    slides[current].classList.add('s-slide--active');
+    dots.forEach((d, i) => d.classList.toggle('s-dot--active', i === n));
+    urlEl.textContent  = slideData[n].url;
+    nameEl.textContent = slideData[n].name;
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(autoTimer);
+      goSlide(i);
+      autoTimer = setInterval(() => goSlide((current + 1) % slides.length), 3500);
+    });
+  });
+
+  /* ---- Proceso accordion ------------------------------- */
+  const procSteps = document.querySelectorAll<HTMLElement>('.s-proc-step');
+
+  procSteps.forEach(step => {
+    step.querySelector('.s-proc-step__trigger')?.addEventListener('click', () => {
+      const isActive = step.classList.contains('s-proc-step--active');
+      procSteps.forEach(s => s.classList.remove('s-proc-step--active'));
+      if (!isActive) step.classList.add('s-proc-step--active');
+    });
+  });
+</script>
+
+<style>
+  /* =====================================================
+     VARIABLES POR TEMA
+  ===================================================== */
+  .service-page {
+    /* Modo oscuro */
+    --sp-bg:        #0B1120;
+    --sp-surface:   #111827;
+    --sp-surface-2: #1a2235;
+    --sp-text:      #F8FAFC;
+    --sp-muted:     #94A3B8;
+    --sp-border:    #1E293B;
+    --sp-shadow:    0 8px 32px rgba(0,0,0,0.4);
+    --sp-grid:      rgba(255,255,255,0.05);
+
+    background: var(--sp-bg);
+    color: var(--sp-text);
+    min-height: 100vh;
+  }
+
+  /* Modo claro — respeta el data-theme del html */
+  :global([data-theme="light"]) .service-page {
+    --sp-bg:        #F8FAFC;
+    --sp-surface:   #FFFFFF;
+    --sp-surface-2: #F1F5F9;
+    --sp-text:      #0F172A;
+    --sp-muted:     #475569;
+    --sp-border:    #E2E8F0;
+    --sp-shadow:    0 4px 20px rgba(0,0,0,0.08);
+    --sp-grid:      rgba(79,70,229,0.05);
+  }
+
+  /* ---- Helpers ---------------------------------------- */
+  .s-section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(79,70,229,0.8);
+    margin-bottom: 0.625rem;
+  }
+
+  .s-section-title {
+    font-family: var(--font-display, 'Clash Display', system-ui);
+    font-size: clamp(1.625rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--sp-text);
+    margin-bottom: 2rem;
+  }
+
+  .s-section-sub {
+    font-size: 1rem;
+    color: var(--sp-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    margin-top: -1rem;
+  }
+
+  /* ---- Botón primario --------------------------------- */
+  .s-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-hex, #4F46E5);
+    color: #fff;
+    padding: 0.875rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: filter 0.2s, transform 0.2s;
+    box-shadow: 0 8px 20px rgba(79,70,229,0.28);
+    border: none;
+    cursor: pointer;
+  }
+
+  .s-btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+
+  .s-btn-primary--full {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* =====================================================
+     HERO — izquierda
+  ===================================================== */
+  .s-hero {
+    padding: 6rem 0 3.5rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--sp-bg);
+  }
+
+  .s-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--sp-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--sp-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, black 60%, transparent);
+    pointer-events: none;
+  }
+
+  .s-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .s-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(79,70,229,0.12);
+    color: var(--accent-hex, #4F46E5);
+    padding: 5px 16px;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(79,70,229,0.25);
+    margin-bottom: 1.375rem;
+  }
+
+  .s-badge__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent-hex, #4F46E5);
+    animation: s-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes s-pulse {
+    70% { box-shadow: 0 0 0 10px rgba(79,70,229,0); }
+    100% { box-shadow: 0 0 0 0 rgba(79,70,229,0); }
+  }
+
+  .s-hero__title {
+    font-family: var(--font-display, 'Clash Display', system-ui);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.04em;
+    color: var(--sp-text);
+    margin-bottom: 1.25rem;
+  }
+
+  .s-accent { color: var(--accent-hex, #4F46E5); }
+
+  .s-hero__desc {
+    font-size: 1.0625rem;
+    color: var(--sp-muted);
+    line-height: 1.78;
+    max-width: 52ch;
+    margin-bottom: 2rem;
+  }
+
+  /* Stats del hero */
+  .s-hero__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .s-stat {
+    background: var(--sp-surface);
+    border: 1px solid var(--sp-border);
+    border-radius: 12px;
+    padding: 0.875rem 1.25rem;
+    text-align: center;
+    min-width: 130px;
+    transition: border-color 0.2s;
+  }
+
+  .s-stat:hover { border-color: rgba(79,70,229,0.35); }
+
+  .s-stat__val {
+    display: block;
+    font-family: var(--font-display, 'Clash Display', system-ui);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--accent-hex, #4F46E5);
+    line-height: 1;
+  }
+
+  .s-stat__lbl {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--sp-muted);
+    margin-top: 4px;
+  }
+
+  /* =====================================================
+     GALERÍA ROTATIVA
+  ===================================================== */
+  .s-gallery {
+    padding: 1rem 0 3.5rem;
+    background: var(--sp-bg);
+  }
+
+  .s-gallery__frame {
+  background: var(--sp-surface);
+  border: 1px solid var(--sp-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--sp-shadow);
+  
+  /* Añade esto para asegurar que use todo el espacio del container */
+  width: 100%; 
+  margin: 0 auto;
+}
+
+  .s-gallery__bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--sp-bg);
+    border-bottom: 1px solid var(--sp-border);
+  }
+
+  .s-gallery__dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .s-gallery__dots span {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .s-gallery__url {
+    flex: 1;
+    background: var(--sp-surface);
+    border: 1px solid var(--sp-border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--sp-muted);
+    display: flex;
+    align-items: center;
+      gap: 6px;
+  }
+
+  /* Slides */
+  .s-gallery__slides {
+  position: relative;
+  height: 465px; /* Antes era 320px. Con 520px se ve mucho más profesional */
+  overflow: hidden;
+}
+
+  .s-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
+    pointer-events: none;
+  }
+
+  .s-slide--active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
+  .s-slide--exit {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  .s-slide__img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  /* Mockup CSS fallback */
+  .s-slide__mock {
+    width: 100%; height: 100%;
+    background: var(--sp-surface-2);
+    padding: 16px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mock-nav-strip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sp-border);
+  }
+
+  .mock-logo {
+    width: 60px; height: 12px;
+    background: var(--accent-hex, #4F46E5);
+    border-radius: 3px;
+    opacity: 0.6;
+  }
+
+  .mock-links {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .mock-links span {
+    display: block;
+    width: 28px; height: 6px;
+    background: var(--sp-border);
+    border-radius: 3px;
+  }
+
+  .mock-cta-sm {
+    width: 48px; height: 18px;
+    background: var(--accent-hex, #4F46E5);
+    border-radius: 100px;
+    opacity: 0.7;
+  }
+
+ .mock-hero-strip {
+  display: flex;
+  gap: 4rem; /* Aumentamos el espacio entre columnas */
+  padding: 2rem; /* Más aire interno */
+  align-items: center;
+  flex: 1;
+}
+
+.mock-visual-col {
+  width: 40%; /* El cuadro visual ahora es más grande */
+  height: 250px;
+  flex-shrink: 0;
+}
+
+  .mock-copy-col { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+  .mock-h {
+    height: 14px;
+    background: var(--sp-text);
+    border-radius: 4px;
+    opacity: 0.15;
+    width: 90%;
+  }
+
+  .mock-h--short { width: 65%; }
+
+  .mock-p {
+    height: 8px;
+    background: var(--sp-border);
+    border-radius: 3px;
+  }
+
+  .mock-p--short { width: 75%; }
+
+  .mock-btn-row { display: flex; gap: 8px; margin-top: 4px; }
+
+  .mock-btn-p {
+    width: 70px; height: 22px;
+    background: var(--accent-hex, #4F46E5);
+    border-radius: 6px;
+    opacity: 0.8;
+  }
+
+  .mock-btn-g {
+    width: 60px; height: 22px;
+    border: 1px solid var(--sp-border);
+    border-radius: 6px;
+  }
+
+  .mock-visual-col {
+    width: 100px; height: 80px;
+    flex-shrink: 0;
+  }
+
+  .mock-visual-box {
+    width: 100%; height: 100%;
+    background: rgba(79,70,229,0.1);
+    border: 1px solid rgba(79,70,229,0.2);
+    border-radius: 10px;
+  }
+
+  .mock-cards-strip {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mock-card {
+    flex: 1; height: 50px;
+    background: var(--sp-surface);
+    border: 1px solid var(--sp-border);
+    border-radius: 8px;
+  }
+
+  /* Controles */
+  .s-gallery__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-top: 1px solid var(--sp-border);
+  }
+
+  .s-gallery__slide-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sp-muted);
+  }
+
+  .s-gallery__dots-nav {
+    display: flex;
+    gap: 6px;
+  }
+
+  .s-dot {
+    width: 22px; height: 3px;
+    border-radius: 2px;
+    background: var(--sp-border);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, width 0.2s;
+    padding: 0;
+  }
+
+  .s-dot--active {
+    background: var(--accent-hex, #4F46E5);
+    width: 34px;
+  }
+
+  /* =====================================================
+     FEATURES
+  ===================================================== */
+  .s-features {
+    padding: 3.5rem 0;
+    background: var(--sp-surface);
+  }
+
+  .s-features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.125rem;
+  }
+
+  .s-feat-card {
+    background: var(--sp-bg);
+    border: 1px solid var(--sp-border);
+    border-radius: 16px;
+    padding: 1.625rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: border-color 0.28s, transform 0.28s, box-shadow 0.28s;
+  }
+
+  .s-feat-card__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(79,70,229,0.07), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.28s;
+    pointer-events: none;
+  }
+
+  .s-feat-card:hover {
+    border-color: rgba(79,70,229,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(79,70,229,0.1);
+  }
+
+  .s-feat-card:hover .s-feat-card__glow { opacity: 1; }
+
+  .s-feat-card__icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(79,70,229,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-hex, #4F46E5);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .s-feat-card__title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--sp-text);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .s-feat-card__desc {
+    font-size: 0.875rem;
+    color: var(--sp-muted);
+    line-height: 1.65;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* =====================================================
+     BENEFICIOS + SIDEBAR
+  ===================================================== */
+  .s-details {
+    padding: 3.5rem 0;
+    background: var(--sp-bg);
+  }
+
+  .s-details__grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .s-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .s-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--sp-surface);
+    border: 1px solid var(--sp-border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .s-benefit:hover {
+    border-color: rgba(79,70,229,0.3);
+    transform: translateX(4px);
+  }
+
+  .s-benefit__icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  .s-benefit__text {
+    font-size: 0.9375rem;
+    color: var(--sp-text);
+    line-height: 1.6;
+  }
+
+  /* Sidebar */
+  .s-sidebar__card {
+    position: sticky;
+    top: 90px;
+    background: var(--sp-surface);
+    border: 2px solid rgba(79,70,229,0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--sp-shadow);
+  }
+
+  .s-sidebar__header {
+    text-align: center;
+    padding-bottom: 1.375rem;
+    margin-bottom: 1.375rem;
+    border-bottom: 1px solid var(--sp-border);
+  }
+
+  .s-sidebar__title {
+    font-family: var(--font-display, 'Clash Display', system-ui);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--sp-text);
+    margin-bottom: 4px;
+  }
+
+  .s-sidebar__sub {
+    font-size: 0.8125rem;
+    color: var(--sp-muted);
+  }
+
+  .s-sidebar__price-row {
+    display: flex;
+    border: 1px solid var(--sp-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.375rem;
+  }
+
+  .s-price-col {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .s-price-col--accent {
+    background: rgba(79,70,229,0.06);
+  }
+
+  .s-price-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--sp-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .s-price-val {
+    font-family: var(--font-display, 'Clash Display', system-ui);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--sp-text);
+    letter-spacing: -0.02em;
+  }
+
+  .s-price-time {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sp-text);
+  }
+
+  .s-sidebar__checks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 1.125rem;
+  }
+
+  .s-sidebar__checks li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8125rem;
+    color: var(--sp-muted);
+  }
+
+  /* =====================================================
+     PROCESO
+  ===================================================== */
+  .s-process {
+    padding: 3.5rem 0;
+    background: var(--sp-surface);
+  }
+
+  .s-process__steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    max-width: 680px;
+  }
+
+  .s-proc-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 16px;
+    cursor: pointer;
+  }
+
+  .s-proc-step__spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .s-proc-step__dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(79,70,229,0.28);
+    background: var(--sp-bg);
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .s-proc-step--active .s-proc-step__dot,
+  .s-proc-step:hover .s-proc-step__dot {
+    background: var(--accent-hex, #4F46E5);
+    border-color: var(--accent-hex, #4F46E5);
+    box-shadow: 0 0 0 4px rgba(79,70,229,0.14);
+  }
+
+  .s-proc-step__line {
+    width: 1.5px;
+    flex: 1;
+    min-height: 16px;
+    background: var(--sp-border);
+    margin: 4px 0;
+  }
+
+  .s-proc-step:last-child .s-proc-step__line { display: none; }
+
+  .s-proc-step__body { padding-bottom: 1.625rem; }
+  .s-proc-step:last-child .s-proc-step__body { padding-bottom: 0; }
+
+  .s-proc-step__num {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-hex, #4F46E5);
+    margin-bottom: 4px;
+  }
+
+  .s-proc-step__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .s-proc-step__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sp-muted);
+    transition: color 0.22s;
+  }
+
+  .s-proc-step--active .s-proc-step__title,
+  .s-proc-step:hover .s-proc-step__title {
+    color: var(--accent-hex, #4F46E5);
+  }
+
+  .s-proc-step__chevron {
+    color: var(--sp-muted);
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), color 0.22s;
+  }
+
+  .s-proc-step--active .s-proc-step__chevron {
+    transform: rotate(180deg);
+    color: var(--accent-hex, #4F46E5);
+  }
+
+  .s-proc-step__detail {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.38s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+  }
+
+  .s-proc-step--active .s-proc-step__detail {
+    max-height: 80px;
+    opacity: 1;
+  }
+
+  .s-proc-step__detail p {
+    font-size: 0.9rem;
+    color: var(--sp-muted);
+    line-height: 1.7;
+  }
+
+  /* =====================================================
+     CTA FINAL
+  ===================================================== */
+  .s-cta {
+    padding: 3.5rem 0 6rem;
+    background: var(--sp-bg);
+  }
+
+  .s-cta__banner {
+    background: var(--sp-surface);
+    border: 2px solid rgba(79,70,229,0.22);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    text-align: center;
+    background-image: radial-gradient(circle at center, rgba(79,70,229,0.06) 0%, transparent 70%);
+  }
+
+  .s-cta__title {
+    font-family: var(--font-display, 'Clash Display', system-ui);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--sp-text);
+    margin-bottom: 1rem;
+  }
+
+  .s-cta__desc {
+    font-size: 1.0625rem;
+    color: var(--sp-muted);
+    max-width: 50ch;
+    margin: 0 auto 2rem;
+    line-height: 1.75;
+  }
+
+  /* =====================================================
+     RESPONSIVE
+  ===================================================== */
+  @media (max-width: 960px) {
+    .s-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .s-hero__stats {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .s-details__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .s-sidebar__card { position: static; }
+
+    .s-features__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 580px) {
+    .s-hero { padding: 5rem 0 2.5rem; }
+    .s-cta__banner { padding: 2.5rem 1.5rem; }
+  }
+</style>

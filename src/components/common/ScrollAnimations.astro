@@ -1,0 +1,42 @@
+---
+// No tiene props — se usa una sola vez en BaseLayout.astro
+// Activa la clase .visible en todos los elementos con .reveal
+// cuando entran en el viewport
+---
+
+<script>
+  function initScrollAnimations() {
+    // Selecciona todos los elementos que quieren animación
+    const elements = document.querySelectorAll<HTMLElement>(
+      '.reveal, .reveal-fade'
+    );
+
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Una vez visible, deja de observar — la animación no se repite
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        // Empieza la animación cuando el 10% del elemento es visible
+        threshold: 0.10,
+        // Margen negativo: espera a que el elemento esté un poco dentro del viewport
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    elements.forEach(el => observer.observe(el));
+  }
+
+  // Ejecutar al cargar
+  initScrollAnimations();
+
+  // Ejecutar también en navegación SPA (por si usas View Transitions de Astro)
+  document.addEventListener('astro:page-load', initScrollAnimations);
+</script>
