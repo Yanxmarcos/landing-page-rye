@@ -37,3 +37,4 @@ npm run preview   # previsualizar build
 3. Edita `src/data/process.ts` para los pasos del proceso
 4. Edita las variables CSS en `src/styles/global.css` (colores, tipografía)
 5. Cambia el número de WhatsApp en `src/components/common/WhatsappFloat.astro`
+
