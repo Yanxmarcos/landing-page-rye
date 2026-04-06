@@ -1,23 +1,21 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero      from '../components/sections/Hero.astro';
-import Services  from '../components/sections/Services.astro';
-import Process   from '../components/sections/Process.astro';
-//import Portfolio from '../components/sections/Portfolio.astro';
-import Reviews   from '../components/sections/Reviews.astro';
-import About     from '../components/sections/About.astro';
-import Contact   from '../components/sections/Contact.astro';
+import "../styles/global.css";
+import Boton from "../components/Boton.jsx";
 ---
 
-<BaseLayout
-  title="Agencia de Desarrollo Web"
-  description="RYE WEB crea sitios web profesionales que convierten visitantes en clientes. Landing pages, tiendas virtuales y sistemas a medida en Lima, Perú."
->
-  <Hero />
-  <Services />
-  <Process />
-  <!--<Portfolio /> -->
-  <About />
-  <Reviews />
-  <Contact />
-</BaseLayout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1 class="text-9xl font-bold text-blue-700 underline text-center">
+			RYE WEB
+		</h1>
+		<Boton client:load />
+	</body>
+</html>
