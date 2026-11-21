@@ -13,6 +13,19 @@ interface Props {
 }
 
 const { title, description, image } = Astro.props;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'RYE WEB',
+  description: 'Agencia de desarrollo web especializada en landing pages, tiendas virtuales y sistemas web a medida.',
+  url: Astro.site?.href,
+  email: 'ryeweb.sac@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lima',
+    addressCountry: 'PE',
+  },
+};
 ---
 <!doctype html>
 <html lang="es">
@@ -67,21 +80,7 @@ const { title, description, image } = Astro.props;
     </script>
 
     <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "RYE WEB",
-      "description": "Agencia de desarrollo web especializada en landing pages, tiendas virtuales y sistemas web a medida.",
-      "url": "https://ryeweb.com",
-      "email": "ryeweb.sac@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lima",
-        "addressCountry": "PE"
-      }
-    }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <Navbar />

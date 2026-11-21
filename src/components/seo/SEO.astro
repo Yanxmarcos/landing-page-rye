@@ -11,7 +11,7 @@ const {
   title,
   description,
   image = '/favicon.ico',
-  canonical = Astro.url.href,
+  canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href,
   type = 'website',
 } = Astro.props;
 

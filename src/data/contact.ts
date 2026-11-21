@@ -16,7 +16,7 @@ export const contactConfig = {
   // Email
   email: {
     address: 'ryeweb.sac@gmail.com',
-    subject: 'Consulta desde ryeweb.com',
+    subject: 'Consulta desde el sitio de RYE WEB',
     get url() {
       return `mailto:${this.address}?subject=${encodeURIComponent(this.subject)}`;
     },
