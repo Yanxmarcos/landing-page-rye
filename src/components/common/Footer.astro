@@ -1,5 +1,6 @@
 ---
 import { contactConfig } from '../../data/contact';
+import { services } from '../../data/services';
 
 const { whatsapp, email, socials } = contactConfig;
 
@@ -8,14 +9,10 @@ const currentYear = new Date().getFullYear();
 const footerLinks = [
   {
     heading: 'Servicios',
-    links: [
-      { label: 'Landing Pages',        href: '#servicios' },
-      { label: 'Tiendas virtuales',     href: '#servicios' },
-      { label: 'Páginas corporativas',  href: '#servicios' },
-      { label: 'Aulas virtuales',       href: '#servicios' },
-      { label: 'Sistemas web',          href: '#servicios' },
-      { label: 'SEO',                   href: '#servicios' },
-    ],
+    links: services.map(service => ({
+      label: service.title,
+      href: `/servicios/${service.slug}`,
+    })),
   },
   {
     heading: 'Empresa',

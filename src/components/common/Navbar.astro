@@ -8,13 +8,13 @@ const serviceCategories = {
   'Marketing Digital': services.filter(s => ['SEO'].includes(s.tag)),
 };
 
+const homeSection = (id: string) => `${Astro.url.pathname === '/' ? '' : '/'}#${id}`;
 const navLinks = [
-  { label: 'Servicios',  href: '#servicios'  },
-  { label: 'Proceso',    href: '#proceso'     },
-  // { label: 'Portafolio', href: '#portafolio' }, // Activar cuando haya proyectos
-  { label: 'Nosotros',   href: '/#nosotros'   },
-  { label: 'Reseñas',    href: '/#resenas'    },
-  { label: 'Contacto',   href: '/#contacto'   },
+  { label: 'Servicios', href: homeSection('servicios') },
+  { label: 'Proceso',   href: homeSection('proceso') },
+  { label: 'Nosotros',  href: homeSection('nosotros') },
+  { label: 'Reseñas',   href: homeSection('resenas') },
+  { label: 'Contacto',  href: homeSection('contacto') },
 ];
 ---
 
@@ -81,8 +81,11 @@ const navLinks = [
       <button
         class="theme-toggle"
         id="theme-toggle"
-        aria-label="Cambiar entre modo claro y oscuro"
-        title="Cambiar tema"
+        type="button"
+        role="switch"
+        aria-label="Modo claro"
+        aria-checked="false"
+        title="Modo claro"
       >
         <!-- Ícono luna (modo oscuro activo) -->
         <span class="theme-toggle__icon theme-toggle__icon--dark" aria-hidden="true">
@@ -105,7 +108,7 @@ const navLinks = [
       </button>
 
       <!-- CTA desktop -->
-      <a href="#contacto" class="navbar__cta">Cotizar gratis</a>
+      <a href={homeSection('contacto')} class="navbar__cta">Cotizar gratis</a>
 
       <!-- Hamburger móvil -->
       <button
@@ -113,7 +116,7 @@ const navLinks = [
         id="hamburger"
         aria-label="Abrir menú de navegación"
         aria-expanded="false"
-        aria-controls="nav-menu"
+        aria-controls="mobile-menu"
       >
         <span></span>
         <span></span>
@@ -124,7 +127,7 @@ const navLinks = [
   </nav>
 
   <!-- Menú móvil -->
-  <div class="navbar__mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="navbar__mobile-menu" id="mobile-menu" inert>
     <div class="navbar__mobile-inner">
       {navLinks.map(link => (
         <a href={link.href} class="navbar__mobile-link">
@@ -136,50 +139,27 @@ const navLinks = [
           </svg>
         </a>
       ))}
-      <a href="#contacto" class="navbar__mobile-cta">Cotizar gratis</a>
+      <a href={homeSection('contacto')} class="navbar__mobile-cta">Cotizar gratis</a>
     </div>
   </div>
 </header>
 
 <script>
-  /* ---- Dropdown de Servicios --------------------------- */
-  const dropdownContainer = document.querySelector('.navbar__dropdown-container');
-  const dropdownMenu = document.querySelector('.navbar__dropdown');
-
-  if (dropdownContainer && dropdownMenu) {
-    dropdownContainer.addEventListener('mouseenter', () => {
-      dropdownMenu.classList.add('navbar__dropdown--visible');
-    });
-    dropdownContainer.addEventListener('mouseleave', () => {
-      dropdownMenu.classList.remove('navbar__dropdown--visible');
-    });
-  }
-
-
   /* ---- Toggle de tema ---------------------------------- */
-  const toggleBtn = document.getElementById('theme-toggle')!;
-
-  function getTheme(): 'dark' | 'light' {
-    return document.documentElement.getAttribute('data-theme') === 'light'
-      ? 'light'
-      : 'dark';
-  }
-
-  function applyTheme(theme: 'dark' | 'light') {
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-    localStorage.setItem('rye-theme', theme);
-    toggleBtn.setAttribute('aria-label',
-      theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'
-    );
-  }
+  const toggleBtn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+  toggleBtn?.setAttribute('aria-checked', String(root.dataset.theme === 'light'));
 
   toggleBtn?.addEventListener('click', () => {
-    const current = getTheme();
-    applyTheme(current === 'dark' ? 'light' : 'dark');
+    const isLight = root.dataset.theme !== 'light';
+    const theme = isLight ? 'light' : 'dark';
+    root.dataset.theme = theme;
+    toggleBtn.setAttribute('aria-checked', String(isLight));
+    try {
+      localStorage.setItem('rye-theme', theme);
+    } catch {
+      // El cambio visual funciona aunque el navegador bloquee el almacenamiento.
+    }
   });
 
   /* ---- Scroll effect ----------------------------------- */
@@ -192,25 +172,34 @@ const navLinks = [
 
   /* ---- Hamburger --------------------------------------- */
   const hamburger  = document.getElementById('hamburger')!;
-  const mobileMenu = document.getElementById('mobile-menu')!;
+  const mobileMenu = document.querySelector<HTMLElement>('#mobile-menu')!;
 
-  hamburger?.addEventListener('click', () => {
-    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', String(!isOpen));
-    hamburger.classList.toggle('navbar__hamburger--open', !isOpen);
-    mobileMenu.classList.toggle('navbar__mobile-menu--open', !isOpen);
-    mobileMenu.setAttribute('aria-hidden', String(isOpen));
-    document.body.style.overflow = isOpen ? '' : 'hidden';
+  function setMobileMenu(open: boolean) {
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    hamburger.classList.toggle('navbar__hamburger--open', open);
+    mobileMenu.classList.toggle('navbar__mobile-menu--open', open);
+    mobileMenu.inert = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    setMobileMenu(mobileMenu.inert);
   });
 
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.classList.remove('navbar__hamburger--open');
-      mobileMenu.classList.remove('navbar__mobile-menu--open');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setMobileMenu(false));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !mobileMenu.inert) {
+      setMobileMenu(false);
+      hamburger.focus();
+    }
+  });
+
+  window.matchMedia('(max-width: 1024px)').addEventListener('change', event => {
+    if (!event.matches && !mobileMenu.inert) setMobileMenu(false);
   });
 
   /* ---- Active link por sección ------------------------- */
@@ -293,14 +282,6 @@ const navLinks = [
   color: var(--color-blue);
 }
 
-/* WEB cambia de color según el tema (negro en claro / blanco en oscuro) */
-:root {
-  --logo-web-color: #111111;           /* modo oscuro */
-}
-
-[data-theme="light"] {
-  --logo-web-color: #ffffff;           /* modo claro */
-}
   /* --- Links ------------------------------------------- */
   .navbar__links {
     display: flex;
@@ -379,11 +360,12 @@ const navLinks = [
     z-index: 110;
   }
 
-  [data-theme="light"] .navbar__dropdown {
+  :global(html[data-theme="light"]) .navbar__dropdown {
     box-shadow: 0 10px 25px rgba(10,22,40,0.08), 0 4px 10px rgba(10,22,40,0.04);
   }
 
-  .navbar__dropdown--visible {
+  .navbar__dropdown-container:hover .navbar__dropdown,
+  .navbar__dropdown-container:focus-within .navbar__dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -466,8 +448,8 @@ const navLinks = [
   .theme-toggle__icon--light { display: none; }
   .theme-toggle__icon--dark  { display: flex; }
 
-  [data-theme="light"] .theme-toggle__icon--light { display: flex; }
-  [data-theme="light"] .theme-toggle__icon--dark  { display: none; }
+  :global(html[data-theme="light"]) .theme-toggle__icon--light { display: flex; }
+  :global(html[data-theme="light"]) .theme-toggle__icon--dark  { display: none; }
 
   /* Track del toggle */
   .theme-toggle__track {
@@ -480,7 +462,7 @@ const navLinks = [
     transition: background 0.3s;
   }
 
-  [data-theme="light"] .theme-toggle__track {
+  :global(html[data-theme="light"]) .theme-toggle__track {
     background: var(--color-blue);
     border-color: var(--color-blue);
   }
@@ -495,7 +477,7 @@ const navLinks = [
     transition: transform 0.3s var(--ease-out), background 0.3s;
   }
 
-  [data-theme="light"] .theme-toggle__thumb {
+  :global(html[data-theme="light"]) .theme-toggle__thumb {
     transform: translateX(16px);
     background: #fff;
   }
@@ -590,16 +572,17 @@ const navLinks = [
   .navbar__mobile-cta:hover { opacity: 0.88; }
 
   /* --- Responsive -------------------------------------- */
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     .navbar__links,
     .navbar__cta { display: none; }
 
     .navbar__hamburger { display: flex; }
     .navbar__mobile-menu { display: block; }
+    .navbar__controls { margin-left: auto; }
+    .navbar__inner { gap: 0.5rem; }
   }
 
-  /* En móvil el toggle va dentro del menú móvil */
-  @media (max-width: 900px) {
-    .theme-toggle { display: flex; }
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle__thumb { transition: none; }
   }
 </style>

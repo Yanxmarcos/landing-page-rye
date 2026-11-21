@@ -1,21 +1,23 @@
 # RYE WEB
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-En%20Desarrollo-green" alt="Status">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
-</p>
+Sitio web de RYE WEB para presentar servicios de desarrollo web, explicar el proceso de trabajo y recibir solicitudes de cotización. Incluye páginas para cada servicio, reseñas, un formulario de contacto y modos claro y oscuro.
 
-## Descripción
-Proyecto: *"Landing page enfocada en la presentación de servicios de desarrollo de software."*
+## Tecnologías
 
-## Tecnologías Utilizadas
-* **Frontend:** React, Astro, Tailwind CSS.
+Astro, React y Tailwind CSS.
 
-## 👥 Equipo de Desarrollo
-A continuación, se presentan los integrantes.
+## Desarrollo local
 
-| Foto | Nombre | Rol | GitHub |
-| :---: | :--- | :--- | :---: |
-| <img src="https://github.com/Yanxmarcos.png" width="80px;"> | **Yanxmarcos Chan Vásquez** | Developer | [@Yanxmarcos](https://github.com/Yanxmarcos) |
-| <img src="https://github.com/manrodacc.png" width="80px;"> | **Rodrigo Albitrez Cieza** | Developer | [@Rodrigo](https://github.com/manrodacc) |
-| <img src="https://github.com/Desconocido-0.png" width="80px;"> | **Eliaser Avila Zamudio** | Developer | [@Eliaser](https://github.com/Desconocido-0) |
+Requiere Node.js 22.12.0 o posterior y npm.
+
+```sh
+npm ci
+npm run dev
+```
+
+Para compilar el sitio estático en `dist/` y previsualizarlo:
+
+```sh
+npm run build
+npm run preview
+```

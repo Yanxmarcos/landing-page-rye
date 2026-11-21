@@ -21,20 +21,6 @@ import { reviews, reviewStats } from '../../data/reviews';
     <div class="reviews__stats">
       <div class="reviews__stat">
         <span class="reviews__stat-val">
-          {reviewStats.rating}<em>/{reviewStats.ratingMax}</em>
-        </span>
-        <span class="reviews__stat-stars" aria-label="5 estrellas">
-          {Array(5).fill(null).map(() => (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="#F5C518" aria-hidden="true">
-              <path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3l-3.2 1.6.6-3.6L1.8 4.8l3.6-.5z"/>
-            </svg>
-          ))}
-        </span>
-        <span class="reviews__stat-lbl">Calificación promedio</span>
-      </div>
-      <span class="reviews__stat-divider" aria-hidden="true"></span>
-      <div class="reviews__stat">
-        <span class="reviews__stat-val">
           {reviewStats.totalClients}
         </span>
         <span class="reviews__stat-lbl">Clientes satisfechos</span>
@@ -206,19 +192,6 @@ import { reviews, reviewStats } from '../../data/reviews';
     line-height: 1;
   }
 
-  .reviews__stat-val em {
-    font-style: normal;
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    font-weight: 500;
-  }
-
-  .reviews__stat-stars {
-    display: flex;
-    gap: 2px;
-    margin: 2px 0;
-  }
-
   .reviews__stat-lbl {
     font-size: 0.75rem;
     color: var(--color-text-muted);
@@ -234,7 +207,7 @@ import { reviews, reviewStats } from '../../data/reviews';
   /* --- Grid --------------------------------------------- */
   .reviews__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: minmax(0, 40rem);
     gap: 1.125rem;
     margin-bottom: 3rem;
   }
@@ -416,10 +389,6 @@ import { reviews, reviewStats } from '../../data/reviews';
 
   /* --- Responsivo --------------------------------------- */
   @media (max-width: 960px) {
-    .reviews__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
     .reviews__stats {
       gap: 1.25rem;
     }
@@ -428,10 +397,6 @@ import { reviews, reviewStats } from '../../data/reviews';
   }
 
   @media (max-width: 580px) {
-    .reviews__grid {
-      grid-template-columns: 1fr;
-    }
-
     .reviews__stats {
       flex-direction: column;
       align-items: flex-start;

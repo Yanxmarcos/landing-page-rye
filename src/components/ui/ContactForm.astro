@@ -228,7 +228,7 @@ const { serviceOptions, email } = contactConfig;
     setLoading(true);
 
     try {
-      const res = await fetch('https://formspree.io/f/mlgpqjrd', {
+      const res = await fetch(form.action, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
